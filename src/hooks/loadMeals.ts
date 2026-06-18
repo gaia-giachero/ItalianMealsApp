@@ -1,6 +1,4 @@
-import React from "react";
 import { fetchItalianMeals } from "../services/mealsApi";
-
 
   export async function loadMeals(setMealsItems : any) {
     try {
