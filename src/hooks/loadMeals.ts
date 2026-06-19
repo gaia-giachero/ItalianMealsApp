@@ -1,4 +1,4 @@
-import { fetchItalianMeals } from "../services/mealsApi";
+import { fetchItalianMeals } from "../services/meals";
 
 export async function loadMeals(setMealsItems : any) {
   try {

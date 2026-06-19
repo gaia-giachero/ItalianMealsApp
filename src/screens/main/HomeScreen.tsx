@@ -1,5 +1,5 @@
 import { View, FlatList, Pressable, Text, StyleSheet } from "react-native";
-import { loadMeals } from "../hooks/loadMeals";
+import { loadMeals } from "../../hooks/loadMeals";
 import React from "react";
 
 export default function HomeScreen({ navigation }: { navigation: any }) {
