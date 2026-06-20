@@ -1,45 +1,80 @@
-import { View, FlatList, Pressable, Text, StyleSheet } from "react-native";
-import { loadMeals } from "../../hooks/loadMeals";
 import React from "react";
 
+import {
+  View,
+  FlatList,
+  Pressable,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
+import { fetchItalianMeals } from "../../services/meals";
+import { Ionicons } from "@expo/vector-icons";
+import MealCard from "../../components/MealCard";
+interface Meal {
+  idMeal: string;
+  strMeal: string;
+  strCategory: string;
+  strMealThumb: string;
+}
+
 export default function HomeScreen({ navigation }: { navigation: any }) {
-  interface Meal {
-    idMeal: string;
-    strMeal: string;
-    strCategory: string;
-    strMealThumb: string;
+  const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
+  const [err, setErr] = React.useState<string>();
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  async function meals() {
+    setErr(undefined);
+    setLoading(true);
+    try {
+      const mealsItem = await fetchItalianMeals();
+      setMealsItems(mealsItem);
+    } catch (err) {
+      setErr("Riprova ricaricando la pagina");
+    } finally {
+      setLoading(false);
+    }
   }
 
-  const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
-
   React.useEffect(() => {
-    loadMeals(setMealsItems);
-  }, [setMealsItems]);
+    meals();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={mealsItems}
-        keyExtractor={(item) => item.idMeal}
-        renderItem={({ item }) => {
-          const path = `myapp://dettagli/${item.idMeal}`;
+      {loading ? (
+        <View>
+          <ActivityIndicator size="small" color="#000" />
+          <Text>Caricamento dei piatti in corso...</Text>
+        </View>
+      ) : err ? (
+        <View>
+          <Pressable onPress={meals}>
+            <Ionicons name="refresh" size={24} color="black" />
+          </Pressable>
+          <Text>Riprova ricaricando la pagina</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={mealsItems}
+          keyExtractor={(item) => item.idMeal}
+          renderItem={({ item }) => {
+            const path = `myapp://dettagli/${item.idMeal}`;
 
-          return (
-            <Pressable
-              style={styles.card}
-              onPress={() =>
-                navigation.navigate("Details", {
-                  id: item.idMeal,
-                })
-              }
-            >
-              <Text style={styles.title}>{item.strMeal}</Text>
-              <Text style={styles.description}>{item.strCategory}</Text>
-              <Text style={styles.link}>{path}</Text>
-            </Pressable>
-          );
-        }}
-      />
+            return (
+              <MealCard
+                onPress={() =>
+                  navigation.navigate("Details", {
+                    id: item.idMeal,
+                  })
+                }
+                strMeal={item.strMeal}
+                strMealThumb={item.strMealThumb}
+              />
+            );
+          }}
+        />
+      )}
     </View>
   );
 }
