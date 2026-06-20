@@ -12,9 +12,9 @@
 |---|-----------|-------|------------|------|
 | 1 | Login | 🔄 In corso | — | WIP: stile e navigazione |
 | 2 | Header profilo (avatar + nome) | ❌ Mancante | — | Non ancora implementata |
-| 3 | Lista piatti italiani | 🔄 In corso | — | `FlatList` + fetch API ok; mancano stati loading/error/retry |
+| 3 | Lista piatti italiani | 🔄 In corso | — | `FlatList` + fetch API + stati loading/error/retry ok - manca stile|
 | 4 | Ricerca / filtro | ❌ Mancante | — | Non ancora implementata |
-| 5 | Dettaglio piatto | 🔄 In corso | — | Riceve `idMeal` via `route.params`; mancano immagine, istruzioni, ingredienti da `lookup.php` |
+| 5 | Dettaglio piatto | 🔄 In corso | — | Riceve `idMeal` via `route.params`; implementati: immagine, nome, ingredienti da `lookup.php` e istruzioni, da finire lo stile |
 | 6 | Preferiti (AsyncStorage) | ❌ Mancante | — | Non ancora implementata |
 | 7 | Impostazioni + logout | ❌ Mancante | — | Non ancora implementata |
 | 8 | Schermata errore + Retry | ❌ Mancante | — | `loadMeals` fa solo `console.log` sull'errore |
@@ -39,14 +39,12 @@
 - `EyeButton.tsx` — componente per vedere o nascondere la password
 - `HomeScreen.tsx` — `FlatList` che carica i pasti italiani da API con `useEffect` + `useState<Meal[]>` usando il componente `MealCard`
 - `loadMeals.ts` — funzione asincrona che chiama `fetchItalianMeals()` e popola lo stato
-- `DetailsScreen.tsx` — riceve `idMeal` da `route.params`, mostra ID e path; gestisce il caso `id` mancante
-- Struttura cartelle `src/screens/` e `src/hooks/` avviata
+- `DetailsScreen.tsx` — fetch `lookup.php?i={idMeal}`, immagine, nome, ingredienti, istruzioni
 
 ### Cosa manca ancora
 **Funzionalità non implementate:**
 - [ ] Avatar rotondo + nome utente dopo il login (lab 07)
 - [ ] Ricerca/filtro sulla lista in memoria (`TextInput`)
-- [ ] Schermata Dettaglio completa: fetch `lookup.php?i={idMeal}`, immagine, istruzioni, ingredienti
 - [ ] Preferiti con `AsyncStorage` (chiave `app:v1:favs`)
 - [ ] Schermata Impostazioni con logout
 - [ ] Stato UI strutturato `{ status, data, message }` al posto delle variabili sparse (lab 15)
