@@ -34,13 +34,14 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
       setIsLoading(false);
       setEmail("");
       setPassword("");
-      navigation.navigate("Home");
+      navigation.navigate("Home", {
+        name: userFound.name,
+        avatar: userFound.avatarUri,
+      });
     } else {
       setIsLoading(false);
       setError("Email o password non valide! Riprova!");
     }
-
-    console.log("PRESS");
   }
 
   return (
