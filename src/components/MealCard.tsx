@@ -23,7 +23,7 @@ export default function MealCard({
         <Image source={{ uri: strMealThumb }} style={styles.image} />
         <Text>{strMeal}</Text>
       </Pressable>
-      <Pressable onPress={onToggleFavorite}>
+      <Pressable onPress={onToggleFavorite} style={styles.prefer}>
         <Ionicons
           name={isFavorite ? "heart" : "heart-outline"}
           size={32}
@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#e0e0e0",
     backgroundColor: "#ffffff",
+    flexDirection: "row",
+    alignItems: "center",
   },
   direction: {
     flexDirection: "row",
@@ -51,4 +53,7 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 8,
   },
+  prefer: {
+    justifyContent: "flex-end",
+  }
 });
