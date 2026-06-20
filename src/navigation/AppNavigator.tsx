@@ -9,7 +9,7 @@ import DetailsScreen from "../screens/main/DetailScreen";
 const Stack = createNativeStackNavigator();
 
 const linking = {
-  prefixes: ["myapp://"],
+  prefixes: ["exp://"],
   config: {
     screens: {
       Login: "login",
