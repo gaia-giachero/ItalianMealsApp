@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -5,18 +6,29 @@ interface MealCardProps {
   strMeal: string;
   strMealThumb: string;
   onPress: () => void;
+  isFavorite: boolean;
+  onToggleFavorite: () => void;
 }
 
 export default function MealCard({
   strMeal,
   strMealThumb,
   onPress,
+  isFavorite, 
+  onToggleFavorite
 }: MealCardProps) {
   return (
     <View style={styles.card}>
       <Pressable onPress={onPress} style={styles.direction}>
         <Image source={{ uri: strMealThumb }} style={styles.image} />
         <Text>{strMeal}</Text>
+      </Pressable>
+      <Pressable onPress={onToggleFavorite}>
+        <Ionicons
+          name={isFavorite ? "heart" : "heart-outline"}
+          size={32}
+          color={isFavorite ? "red" : "black"}
+        />
       </Pressable>
     </View>
   );
