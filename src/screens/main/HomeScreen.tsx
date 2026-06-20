@@ -27,6 +27,8 @@ export default function HomeScreen({ navigation, route }: any) {
   const name = route.params?.name;
   const avatar = route.params?.avatar;
 
+  const [favorites, setFavorites] = React.useState<string[]>([]);
+
   async function meals() {
     setErr(undefined);
     setLoading(true);
@@ -44,8 +46,16 @@ export default function HomeScreen({ navigation, route }: any) {
     meals();
   }, []);
 
-  function logout(){
-    console.log('LOGOUT')
+  function logout() {
+    console.log("LOGOUT");
+  }
+
+  function toggleFavorite(idMeal: string) {
+    if (favorites.includes(idMeal)) {
+      setFavorites(favorites.filter((id) => id !== idMeal));
+    } else {
+      setFavorites([...favorites, idMeal]);
+    }
   }
 
   return (
@@ -55,7 +65,9 @@ export default function HomeScreen({ navigation, route }: any) {
           <Image source={{ uri: avatar }} style={styles.avatar} />
         </View>
         <Text style={styles.title}>{name}</Text>
-        <Pressable onPress={logout}><Ionicons name="log-out-outline" size={24} color="#000" /></Pressable>
+        <Pressable onPress={logout}>
+          <Ionicons name="log-out-outline" size={24} color="#000" />
+        </Pressable>
       </View>
       <View style={styles.container}>
         {loading ? (
@@ -86,6 +98,8 @@ export default function HomeScreen({ navigation, route }: any) {
                   }
                   strMeal={item.strMeal}
                   strMealThumb={item.strMealThumb}
+                  isFavorite={favorites.includes(item.idMeal)}
+                  onToggleFavorite={() => toggleFavorite(item.idMeal)}
                 />
               );
             }}
