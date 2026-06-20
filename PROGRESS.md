@@ -2,7 +2,7 @@
 **Avanzamento Progetto**  
 
 **Nome:** Gaia Giachero  
-**Data ultimo aggiornamento:** 18/06/2026  
+**Data ultimo aggiornamento:** 20/06/2026  
 **Repository GitHub:** [🔗 Link al repo](https://github.com/gaia-giachero/ItalianMealsApp.git)  
 
 ---
@@ -10,7 +10,7 @@
 ## Schermate completate
 | # | Schermata | Stato | Screenshot | Note |
 |---|-----------|-------|------------|------|
-| 1 | Login | ❌ Mancante | — | Non ancora implementata |
+| 1 | Login | 🔄 In corso | — | WIP: stile e navigazione |
 | 2 | Header profilo (avatar + nome) | ❌ Mancante | — | Non ancora implementata |
 | 3 | Lista piatti italiani | 🔄 In corso | — | `FlatList` + fetch API ok; mancano stati loading/error/retry |
 | 4 | Ricerca / filtro | ❌ Mancante | — | Non ancora implementata |
@@ -33,14 +33,17 @@
 ## Stato attuale del codice
 ### Cosa è già presente
 - `App.tsx` — navigazione `Stack` con `NavigationContainer` e config `linking` (deep link parziale)
-- `HomeScreen.tsx` — `FlatList` che carica i pasti italiani da API con `useEffect` + `useState<Meal[]>`
+- `AuthContext` — context per il passaggio dei dati dell'utente a livello globale
+- `AppNavigator` - creata logica di navigazione esterna e refactorizzato codice `App.tsx` per alleggerire il codice
+- `LoginScreen.tsx` — Login con i 3 utenti mock (`services/auth.ts` con `MOCK_USERS`)
+- `EyeButton.tsx` — componente per vedere o nascondere la password
+- `HomeScreen.tsx` — `FlatList` che carica i pasti italiani da API con `useEffect` + `useState<Meal[]>` usando il componente `MealCard`
 - `loadMeals.ts` — funzione asincrona che chiama `fetchItalianMeals()` e popola lo stato
 - `DetailsScreen.tsx` — riceve `idMeal` da `route.params`, mostra ID e path; gestisce il caso `id` mancante
 - Struttura cartelle `src/screens/` e `src/hooks/` avviata
 
 ### Cosa manca ancora
 **Funzionalità non implementate:**
-- [ ] Login con i 3 utenti mock (`services/auth.ts` con `MOCK_USERS`)
 - [ ] Avatar rotondo + nome utente dopo il login (lab 07)
 - [ ] Ricerca/filtro sulla lista in memoria (`TextInput`)
 - [ ] Schermata Dettaglio completa: fetch `lookup.php?i={idMeal}`, immagine, istruzioni, ingredienti
@@ -48,7 +51,7 @@
 - [ ] Schermata Impostazioni con logout
 - [ ] Stato UI strutturato `{ status, data, message }` al posto delle variabili sparse (lab 15)
 - [ ] Retry su errore API (al momento `catch` fa solo `console.log`)
-- [ ] Stato globale `AuthContext` / `FavoritesContext` (o Zustand) — lab 17
+- [ ] Stato globale `FavoritesContext` (o Zustand) — lab 17
 - [ ] `accessibilityLabel` su elementi interattivi (≥ 2 obbligatori)
 **Bug noti:**
 - Deep link configurato con `myapp://` invece di `exp://` — da correggere per il test con `npx uri-scheme open`
