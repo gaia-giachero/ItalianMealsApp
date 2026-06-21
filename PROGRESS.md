@@ -2,7 +2,7 @@
 **Avanzamento Progetto**  
 
 **Nome:** Gaia Giachero  
-**Data ultimo aggiornamento:** 20/06/2026  
+**Data ultimo aggiornamento:** 21/06/2026  
 **Repository GitHub:** [🔗 Link al repo](https://github.com/gaia-giachero/ItalianMealsApp.git)  
 
 ---
@@ -13,11 +13,11 @@
 | 1 | Login | 🔄 In corso | — | WIP: stile e navigazione |
 | 2 | Header profilo (avatar + nome) | 🔄 In corso | — | implementato con `route.params?` da modificare e sistemare lo stile |
 | 3 | Lista piatti italiani | 🔄 In corso | — | `FlatList` + fetch API + stati loading/error/retry ok - manca stile|
-| 4 | Ricerca / filtro | ❌ Mancante | — | Non ancora implementata |
+| 4 | Ricerca / filtro | 🔄 In corso | — | implementata con `InputText` - manca stile |
 | 5 | Dettaglio piatto | 🔄 In corso | — | Riceve `idMeal` via `route.params`; implementati: immagine, nome, ingredienti da `lookup.php` e istruzioni, da finire lo stile |
-| 6 | Preferiti (AsyncStorage) | ❌ Mancante | — | Non ancora implementata |
+| 6 | Preferiti (AsyncStorage) | 🔄 In corso | — | implementata con `AsyncStorage` - manca stile |
 | 7 | Impostazioni + logout | ❌ Mancante | — | Non ancora implementata |
-| 8 | Schermata errore + Retry | ❌ Mancante | — | `loadMeals` fa solo `console.log` sull'errore |
+| 8 | Schermata errore + Retry | ✅ Completo | — | implementata in `HomeScreen` e `DetailScreen` |
 | 9 | Accessibilità (≥ 2 accorgimenti) | ❌ Mancante | — | Nessun `accessibilityLabel` presente |
 | 10 | Deep link (`exp://…/meal/:idMeal`) | ✅ Completo | — | Config `linking` presente in `App.tsx` ma usa `myapp://` invece di `exp://`; |
  
@@ -38,14 +38,13 @@
 - `LoginScreen.tsx` — Login con i 3 utenti mock (`services/auth.ts` con `MOCK_USERS`)
 - `EyeButton.tsx` — componente per vedere o nascondere la password
 - `HomeScreen.tsx` — `FlatList` che carica i pasti italiani da API con `useEffect` + `useState<Meal[]>` usando il componente `MealCard`
-- `loadMeals.ts` — funzione asincrona che chiama `fetchItalianMeals()` e popola lo stato
 - `DetailsScreen.tsx` — fetch `lookup.php?i={idMeal}`, immagine, nome, ingredienti, istruzioni
 - Avatar rotondo + nome utente dopo il login passato con `route.params?`
+- Ricerca/filtro sulla lista in memoria (`TextInput`)
+- Preferiti con `AsyncStorage` (chiave `app:v1:favs`)
 
 ### Cosa manca ancora
 **Funzionalità non implementate:**
-- [ ] Ricerca/filtro sulla lista in memoria (`TextInput`)
-- [ ] Preferiti con `AsyncStorage` (chiave `app:v1:favs`)
 - [ ] Schermata Impostazioni con logout
 - [ ] Stato UI strutturato `{ status, data, message }` al posto delle variabili sparse (lab 15)
 - [ ] Stato globale `FavoritesContext` (o Zustand) — lab 17
