@@ -9,9 +9,13 @@ import {
   ActivityIndicator,
   Image,
 } from "react-native";
-import { fetchItalianMeals } from "../../services/meals";
 import { Ionicons } from "@expo/vector-icons";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { fetchItalianMeals } from "../../services/meals";
 import MealCard from "../../components/MealCard";
+import SearchBar from "../../components/SearchBar";
 interface Meal {
   idMeal: string;
   strMeal: string;
@@ -29,6 +33,9 @@ export default function HomeScreen({ navigation, route }: any) {
 
   const [favorites, setFavorites] = React.useState<string[]>([]);
 
+  const isLoaded = React.useRef(false);
+
+  // LOADING OF MEALS
   async function meals() {
     setErr(undefined);
     setLoading(true);
@@ -46,10 +53,12 @@ export default function HomeScreen({ navigation, route }: any) {
     meals();
   }, []);
 
+  // LOGOUT ACCOUNT
   function logout() {
     console.log("LOGOUT");
   }
 
+  // BUTTON FAVORITES
   function toggleFavorite(idMeal: string) {
     if (favorites.includes(idMeal)) {
       setFavorites(favorites.filter((id) => id !== idMeal));
@@ -57,6 +66,39 @@ export default function HomeScreen({ navigation, route }: any) {
       setFavorites([...favorites, idMeal]);
     }
   }
+
+  // FAVORITES
+  async function loadFavorites() {
+    try {
+      const favorites = await AsyncStorage.getItem("app:v1:favs");
+      if (favorites !== null) {
+        setFavorites(JSON.parse(favorites));
+      }
+    } catch (_) {}
+    isLoaded.current = true;
+  }
+
+  React.useEffect(() => {
+    loadFavorites();
+  }, []);
+
+  async function saveFavorites() {
+    if (!isLoaded.current) return;
+    try {
+      await AsyncStorage.setItem("app:v1:favs", JSON.stringify(favorites));
+    } catch (_) {}
+  }
+
+  React.useEffect(() => {
+    saveFavorites();
+  }, [favorites]);
+
+  // SEARCH AND FILTER
+  const [search, setSearch] = React.useState<string>("");
+
+  const filteredMeals = mealsItems.filter((item) =>
+    item.strMeal.toLowerCase().includes(search.toLowerCase()),
+  );
 
   return (
     <View style={styles.container}>
@@ -83,27 +125,28 @@ export default function HomeScreen({ navigation, route }: any) {
             <Text>Riprova ricaricando la pagina</Text>
           </View>
         ) : (
-          <FlatList
-            data={mealsItems}
-            keyExtractor={(item) => item.idMeal}
-            renderItem={({ item }) => {
-              const path = `myapp://dettagli/${item.idMeal}`;
-
-              return (
-                <MealCard
-                  onPress={() =>
-                    navigation.navigate("Details", {
-                      id: item.idMeal,
-                    })
-                  }
-                  strMeal={item.strMeal}
-                  strMealThumb={item.strMealThumb}
-                  isFavorite={favorites.includes(item.idMeal)}
-                  onToggleFavorite={() => toggleFavorite(item.idMeal)}
-                />
-              );
-            }}
-          />
+          <View>
+            <SearchBar onChangeSearch={setSearch} textSearch={search} />
+            <FlatList
+              data={filteredMeals}
+              keyExtractor={(item) => item.idMeal}
+              renderItem={({ item }) => {
+                return (
+                  <MealCard
+                    onPress={() =>
+                      navigation.navigate("Details", {
+                        id: item.idMeal,
+                      })
+                    }
+                    strMeal={item.strMeal}
+                    strMealThumb={item.strMealThumb}
+                    isFavorite={favorites.includes(item.idMeal)}
+                    onToggleFavorite={() => toggleFavorite(item.idMeal)}
+                  />
+                );
+              }}
+            />
+          </View>
         )}
       </View>
     </View>
