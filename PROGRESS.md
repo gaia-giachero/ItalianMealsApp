@@ -2,7 +2,7 @@
 **Avanzamento Progetto**  
 
 **Nome:** Gaia Giachero  
-**Data ultimo aggiornamento:** 21/06/2026  
+**Data ultimo aggiornamento:** 22/06/2026  
 **Repository GitHub:** [🔗 Link al repo](https://github.com/gaia-giachero/ItalianMealsApp.git)  
 
 ---
@@ -16,7 +16,7 @@
 | 4 | Ricerca / filtro | 🔄 In corso | — | implementata con `InputText` - manca stile |
 | 5 | Dettaglio piatto | 🔄 In corso | — | Riceve `idMeal` via `route.params`; implementati: immagine, nome, ingredienti da `lookup.php` e istruzioni, da finire lo stile |
 | 6 | Preferiti (AsyncStorage) | 🔄 In corso | — | implementata con `AsyncStorage` - manca stile |
-| 7 | Impostazioni + logout | ❌ Mancante | — | Non ancora implementata |
+| 7 | Impostazioni + logout | 🔄 In corso | — | Non ancora implementata ma ora esiste |
 | 8 | Schermata errore + Retry | ✅ Completo | — | implementata in `HomeScreen` e `DetailScreen` |
 | 9 | Accessibilità (≥ 2 accorgimenti) | ❌ Mancante | — | Nessun `accessibilityLabel` presente |
 | 10 | Deep link (`exp://…/meal/:idMeal`) | ✅ Completo | — | Config `linking` presente in `App.tsx` ma usa `myapp://` invece di `exp://`; |
