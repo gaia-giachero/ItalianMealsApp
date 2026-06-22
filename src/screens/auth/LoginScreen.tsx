@@ -35,8 +35,11 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
       setEmail("");
       setPassword("");
       navigation.navigate("MainTab", {
-        name: userFound.name,
-        avatar: userFound.avatarUri,
+        screen: "Home", 
+        params: {
+          name: userFound.name,
+          avatar: userFound.avatarUri,
+        },
       });
     } else {
       setIsLoading(false);
