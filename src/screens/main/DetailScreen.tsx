@@ -71,9 +71,11 @@ export default function DetailsScreen({ route, navigation }: any) {
         <View>
           <Image source={{ uri: meal?.strMealThumb }} style={styles.image} />
           <Text>{meal?.strMeal}</Text>
-          {meal?.ingredients.map((i, index) => 
+          <Text>INGREDIENTS</Text>
+          {meal?.ingredients.map((i, index) =>
             <Text key={index.toString()}>{i}</Text>
           )}
+          <Text>STEPS</Text>
           <Text>{meal?.strInstructions}</Text>
         </View>
       )}
