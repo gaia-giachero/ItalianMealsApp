@@ -24,18 +24,15 @@ interface Meal {
 }
 
 export default function HomeScreen({ navigation, route }: any) {
+  const name = route.params?.name;
+  const avatar = route.params?.avatar;
+  
+  // LOADING OF MEALS
   const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
   const [err, setErr] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(false);
-
-  const name = route.params?.name;
-  const avatar = route.params?.avatar;
-
-  const [favorites, setFavorites] = React.useState<string[]>([]);
-
   const isLoaded = React.useRef(false);
-
-  // LOADING OF MEALS
+  
   async function meals() {
     setErr(undefined);
     setLoading(true);
@@ -48,17 +45,19 @@ export default function HomeScreen({ navigation, route }: any) {
       setLoading(false);
     }
   }
-
+  
   React.useEffect(() => {
     meals();
   }, []);
-
+  
   // LOGOUT ACCOUNT
   function logout() {
     console.log("LOGOUT");
   }
+  
+  // FAVORITES
+  const [favorites, setFavorites] = React.useState<string[]>([]);
 
-  // BUTTON FAVORITES
   function toggleFavorite(idMeal: string) {
     if (favorites.includes(idMeal)) {
       setFavorites(favorites.filter((id) => id !== idMeal));
@@ -67,7 +66,6 @@ export default function HomeScreen({ navigation, route }: any) {
     }
   }
 
-  // FAVORITES
   async function loadFavorites() {
     try {
       const favorites = await AsyncStorage.getItem("app:v1:favs");
