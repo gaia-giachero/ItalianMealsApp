@@ -16,6 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchItalianMeals } from "../../services/meals";
 import MealCard from "../../components/MealCard";
 import SearchBar from "../../components/SearchBar";
+
 interface Meal {
   idMeal: string;
   strMeal: string;
@@ -26,13 +27,13 @@ interface Meal {
 export default function HomeScreen({ navigation, route }: any) {
   const name = route.params?.name;
   const avatar = route.params?.avatar;
-  
+
   // LOADING OF MEALS
   const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
   const [err, setErr] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(false);
   const isLoaded = React.useRef(false);
-  
+
   async function meals() {
     setErr(undefined);
     setLoading(true);
@@ -45,16 +46,16 @@ export default function HomeScreen({ navigation, route }: any) {
       setLoading(false);
     }
   }
-  
+
   React.useEffect(() => {
     meals();
   }, []);
-  
+
   // LOGOUT ACCOUNT
   function logout() {
     console.log("LOGOUT");
   }
-  
+
   // FAVORITES
   const [favorites, setFavorites] = React.useState<string[]>([]);
 
@@ -97,6 +98,15 @@ export default function HomeScreen({ navigation, route }: any) {
   const filteredMeals = mealsItems.filter((item) =>
     item.strMeal.toLowerCase().includes(search.toLowerCase()),
   );
+
+  // REFRESHING FLATLIST
+  const [isRefreshing, setIsRefreshing] = React.useState(false);
+
+  async function handleRefresh() {
+    setIsRefreshing(true);
+    await meals(); // Riesegue la chiamata API reale e aggiorna lo stato dei piatti
+    setIsRefreshing(false);
+  }
 
   return (
     <View style={styles.container}>
@@ -143,6 +153,8 @@ export default function HomeScreen({ navigation, route }: any) {
                   />
                 );
               }}
+              refreshing={isRefreshing}
+              onRefresh={handleRefresh}
             />
           </View>
         )}
