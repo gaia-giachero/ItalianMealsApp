@@ -3,8 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import LoginScreen from "../screens/auth/LoginScreen";
-import HomeScreen from "../screens/main/HomeScreen";
 import DetailsScreen from "../screens/main/DetailScreen";
+import TabNavigator from "./TabNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +13,7 @@ const linking = {
   config: {
     screens: {
       Login: "login",
-      Home: "home",
+      MainTab: "main tab",
       Details: "dettagli/:id",
     },
   },
@@ -24,7 +24,7 @@ export default function AppNavigator() {
     <NavigationContainer linking={linking}>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="MainTab" component={TabNavigator} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
