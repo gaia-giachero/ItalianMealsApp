@@ -12,6 +12,8 @@ import {
 import { validateLogin } from "../../services/auth";
 import EyeButton from "../../components/EyeButton";
 
+import { globalStyles } from "../../theme/style";
+
 export default function LoginScreen({ navigation }: { navigation: any }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -48,10 +50,10 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
+        style={styles.bkgForm}
         keyboardVerticalOffset={50}
       >
         <TextInput
@@ -75,9 +77,9 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
             style={styles.eyeButton}
           />
         </View>
-        {error !== "" && <Text style={{ color: "red" }}>{error}</Text>}
+        {error !== "" && <Text style={globalStyles.errorText}>{error}</Text>}
         <Pressable
-          style={styles.btn}
+          style={globalStyles.btn}
           onPress={handleLogin}
           disabled={isLoading}
         >
@@ -93,35 +95,11 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  bkgForm: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#ff0000",
     padding: 15,
   },
-  card: {
-    backgroundColor: "#ffffff",
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#333333",
-  },
-  description: {
-    fontSize: 14,
-    color: "#666666",
-    marginTop: 4,
-  },
-  link: {
-    marginTop: 8,
-    fontSize: 12,
-    color: "#007aff",
-  },
-
   row: {
     paddingTop: 15,
     paddingBottom: 15,
@@ -133,20 +111,9 @@ const styles = StyleSheet.create({
     borderColor: "#ffd900",
     marginBottom: 10,
   },
-  btn: {
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingRight: 40,
-    paddingLeft: 20,
-    borderWidth: 3,
-    borderRadius: 10,
-    borderColor: "#ffd900",
-    backgroundColor: "#fff9d8",
-  },
   eyeButton: {
     position: "absolute",
     right: 10,
-    top: "50%",
-    transform: [{ translateY: -12 }],
+    top: "50%"
   },
 });
