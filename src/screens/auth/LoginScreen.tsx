@@ -13,6 +13,7 @@ import { validateLogin } from "../../services/auth";
 import EyeButton from "../../components/EyeButton";
 
 import { globalStyles } from "../../theme/style";
+import { colors } from "../../theme/colors";
 
 export default function LoginScreen({ navigation }: { navigation: any }) {
   const [email, setEmail] = React.useState("");
@@ -37,7 +38,7 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
       setEmail("");
       setPassword("");
       navigation.navigate("MainTab", {
-        screen: "Home", 
+        screen: "Home",
         params: {
           name: userFound.name,
           avatar: userFound.avatarUri,
@@ -50,26 +51,30 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
   }
 
   return (
-    <View style={globalStyles.container}>
+    <View style={[globalStyles.container, globalStyles.centered]}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.bkgForm}
+        style={globalStyles.panel}
         keyboardVerticalOffset={50}
       >
+        <Text style={[globalStyles.title, styles.spacing]}>Accedi</Text>
         <TextInput
-          style={styles.row}
+          style={[globalStyles.input, styles.form]}
           value={email}
           onChangeText={setEmail}
           placeholder="Email"
+          placeholderTextColor={colors.gray500}
           keyboardType="email-address"
           autoCapitalize="none"
         />
-        <View style={styles.row}>
+        <View style={[styles.passwordRow, styles.form]}>
           <TextInput
             value={password}
             onChangeText={setPassword}
             secureTextEntry={!isPasswordVisible}
             placeholder="Password"
+            placeholderTextColor={colors.gray500}
+            style={[globalStyles.input, styles.passwordInput]}
           />
           <EyeButton
             state={isPasswordVisible}
@@ -77,16 +82,20 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
             style={styles.eyeButton}
           />
         </View>
-        {error !== "" && <Text style={globalStyles.errorText}>{error}</Text>}
+        {error !== "" && (
+          <Text style={[globalStyles.errorText, styles.form]}>
+            {error}
+          </Text>
+        )}
         <Pressable
-          style={globalStyles.btn}
+          style={[globalStyles.btn, styles.form]}
           onPress={handleLogin}
           disabled={isLoading}
         >
           {isLoading ? (
-            <ActivityIndicator size="small" color="#000" />
+            <ActivityIndicator size="small" color="#fff" />
           ) : (
-            <Text>Login</Text>
+            <Text style={globalStyles.btnText}>Login</Text>
           )}
         </Pressable>
       </KeyboardAvoidingView>
@@ -95,25 +104,23 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
 }
 
 const styles = StyleSheet.create({
-  bkgForm: {
-    flex: 1,
-    backgroundColor: "#ff0000",
-    padding: 15,
+  form: {
+    width: "100%",
   },
-  row: {
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingRight: 40,
-    paddingLeft: 20,
-    borderWidth: 2,
-    borderRadius: 10,
-    backgroundColor: "#fff9d899",
-    borderColor: "#ffd900",
-    marginBottom: 10,
+  spacing: {
+    marginBottom: 30,
+  },
+  passwordRow: {
+    width: "100%",
+    position: "relative",
+  },
+  passwordInput: {
+    paddingRight: 50, // spazio per l'EyeButton
   },
   eyeButton: {
     position: "absolute",
-    right: 10,
-    top: "50%"
+    right: 15,
+    top: "50%",
+    transform: [{ translateY: -12 }],
   },
 });
