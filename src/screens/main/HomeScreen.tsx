@@ -1,4 +1,7 @@
 import React from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons } from "@expo/vector-icons";
+import { fetchItalianMeals } from "../../services/meals";
 
 import {
   View,
@@ -9,13 +12,12 @@ import {
   ActivityIndicator,
   Image,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import { fetchItalianMeals } from "../../services/meals";
 import MealCard from "../../components/MealCard";
 import SearchBar from "../../components/SearchBar";
+
+import { globalStyles } from "../../theme/style";
+import { colors } from "../../theme/colors";
 
 interface Meal {
   idMeal: string;
@@ -99,6 +101,10 @@ export default function HomeScreen({ navigation, route }: any) {
     item.strMeal.toLowerCase().includes(search.toLowerCase()),
   );
 
+  function cancelField(){
+    setSearch("");
+  }
+
   // REFRESHING FLATLIST
   const [isRefreshing, setIsRefreshing] = React.useState(false);
 
@@ -109,31 +115,31 @@ export default function HomeScreen({ navigation, route }: any) {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View style={globalStyles.container}>
+      <View style={globalStyles.header}>
         <View style={styles.avatarContainer}>
           <Image source={{ uri: avatar }} style={styles.avatar} />
         </View>
-        <Text style={styles.title}>{name}</Text>
+        <Text style={[globalStyles.title, styles.headerTitle]}>{name}</Text>
         <Pressable onPress={logout}>
-          <Ionicons name="log-out-outline" size={24} color="#000" />
+          <Ionicons name="log-out-outline" size={24} color={colors.gray500} />
         </Pressable>
       </View>
-      <View style={styles.container}>
+      <View style={styles.body}>
         {loading ? (
-          <View>
-            <ActivityIndicator size="small" color="#000" />
-            <Text>Caricamento dei piatti in corso...</Text>
+          <View style={globalStyles.centered}>
+            <ActivityIndicator size="small" color={colors.primaryAction} />
+            <Text style={[globalStyles.text, styles.spacedTop]}>Caricamento dei piatti in corso...</Text>
           </View>
         ) : err ? (
-          <View>
+          <View style={globalStyles.centered}>
             <Pressable onPress={meals}>
-              <Ionicons name="refresh" size={24} color="black" />
+              <Ionicons name="refresh" size={24} color={colors.primaryAction} />
             </Pressable>
-            <Text>Riprova ricaricando la pagina</Text>
+            <Text style={[globalStyles.text, styles.spacedTop]}>Riprova ricaricando la pagina</Text>
           </View>
         ) : (
-          <View>
+          <View style={styles.body}>
             <SearchBar onChangeSearch={setSearch} textSearch={search} />
             <FlatList
               data={filteredMeals}
@@ -164,46 +170,24 @@ export default function HomeScreen({ navigation, route }: any) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  body: {
     flex: 1,
   },
-  card: {
-    backgroundColor: "#ffffff",
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
+  headerTitle: {
+    flex: 1,
   },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#333333",
-  },
-  description: {
-    fontSize: 14,
-    color: "#666666",
-    marginTop: 4,
-  },
-  link: {
-    marginTop: 8,
-    fontSize: 12,
-    color: "#007aff",
+  spacedTop: {
+    marginTop: 10,
   },
   avatarContainer: {
     width: 50,
     height: 50,
     borderRadius: 25,
     overflow: "hidden",
+    backgroundColor: colors.gray500,
   },
   avatar: {
     width: 50,
     height: 50,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 15,
-    gap: 10,
   },
 });
