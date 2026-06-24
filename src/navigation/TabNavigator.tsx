@@ -1,17 +1,45 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { Pressable, View, StyleSheet } from "react-native";
 
 import HomeScreen from "../screens/main/HomeScreen";
 import SettingScreen from "../screens/main/SettingsScreen";
+import { colors } from "../theme/colors";
+import FavouriteScreen from "../screens/main/FavouriteScreen";
 
 const Tab = createBottomTabNavigator();
+
+function CustomTabButton(props: any) {
+  return (
+    <Pressable {...props} style={styles.tabButton}>
+      <View style={styles.tabButtonInner}>{props.children}</View>
+    </Pressable>
+  );
+}
 
 export default function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarShowLabel: false, // Nasconde la scritta testuale sotto le icone
+        tabBarShowLabel: false,
+        headerShown: false,
+        sceneStyle: { backgroundColor: colors.primary },
+        tabBarStyle: {
+          backgroundColor: "rgba(146, 177, 255, 0.5)",
+          borderTopWidth: 0,
+          height: 67,
+          position: "absolute",
+          left: 20,
+          right: 20,
+          bottom: 20,
+          borderRadius: 24,
+          elevation: 0,
+          paddingBottom: 0,
+        },
+        tabBarButton: (props) => <CustomTabButton {...props} />,
+        tabBarActiveTintColor: colors.primaryAction,
+        tabBarInactiveTintColor: colors.gray500,
       }}
     >
       <Tab.Screen
@@ -20,6 +48,15 @@ export default function TabNavigator() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favourite"
+        component={FavouriteScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="heart" size={size} color={color} />
           ),
         }}
       />
@@ -35,3 +72,14 @@ export default function TabNavigator() {
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  tabButton: {
+    flex: 1,
+  },
+  tabButtonInner: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
