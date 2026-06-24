@@ -5,7 +5,7 @@ export const globalStyles = StyleSheet.create({
   // View esterna che avvolge ogni schermata
   container: {
     flex: 1,
-    backgroundColor: colors.primary,
+    backgroundColor: '#fff',
   },
   // Header con avatar (HomeScreen, ecc.)
   header: {
@@ -73,7 +73,7 @@ export const globalStyles = StyleSheet.create({
   // Pannello/card di sfondo (es. dietro un form), più piccolo della pagina
   panel: {
     width: '92%',
-    backgroundColor: colors.gray100,
+    backgroundColor: colors.surface,
     borderRadius: 24,
     paddingVertical: 32,
     paddingHorizontal: 20,
