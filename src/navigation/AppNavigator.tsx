@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/auth/LoginScreen";
 import DetailsScreen from "../screens/main/DetailScreen";
 import TabNavigator from "./TabNavigator";
+import { colors } from "../theme/colors";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,12 @@ const linking = {
 export default function AppNavigator() {
   return (
     <NavigationContainer linking={linking}>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: colors.primary },
+        }}
+      >
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="MainTab" component={TabNavigator} />
         <Stack.Screen name="Details" component={DetailsScreen} />
