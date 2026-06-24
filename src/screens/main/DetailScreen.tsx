@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import { fetchMealById } from "../../services/meals";
 import { Ionicons } from "@expo/vector-icons";
+import { globalStyles } from "../../theme/style";
+import { colors } from "../../theme/colors";
 
 interface DetailsMeals {
   strMeal: string;
@@ -44,39 +46,64 @@ export default function DetailsScreen({ route, navigation }: any) {
 
   if (!id) {
     return (
-      <View style={styles.center}>
-        <Text style={styles.error}>Invalid deep link</Text>
-        <Pressable style={styles.button} onPress={() => navigation.goBack()}>
-          <Text style={styles.buttonText}>Torna alla Home</Text>
+      <View style={[globalStyles.container, globalStyles.centered]}>
+        <Text style={globalStyles.errorText}>Invalid deep link</Text>
+        <Pressable
+          style={[globalStyles.btn, styles.backHomeBtn]}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={globalStyles.btnText}>Torna alla Home</Text>
         </Pressable>
       </View>
     );
   }
 
   return (
-    <ScrollView>
+    <ScrollView
+      style={globalStyles.container}
+      contentContainerStyle={styles.scrollContent}
+    >
+      <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Ionicons name="arrow-back" size={24} color={colors.gray700} />
+      </Pressable>
+
       {loading ? (
-        <View>
-          <ActivityIndicator size="small" color="#000" />
-          <Text>Caricamento del piatto in corso...</Text>
+        <View style={globalStyles.centered}>
+          <ActivityIndicator size="small" color={colors.primaryAction} />
+          <Text style={[globalStyles.text, styles.spacedTop]}>
+            Caricamento del piatto in corso...
+          </Text>
         </View>
       ) : error ? (
-        <View>
+        <View style={globalStyles.centered}>
           <Pressable onPress={mealById}>
-            <Ionicons name="refresh" size={24} color="black" />
+            <Ionicons name="refresh" size={24} color={colors.primaryAction} />
           </Pressable>
-          <Text>Riprova ricaricando la pagina</Text>
+          <Text style={[globalStyles.text, styles.spacedTop]}>
+            Riprova ricaricando la pagina
+          </Text>
         </View>
       ) : (
-        <View>
+        <View style={styles.content}>
           <Image source={{ uri: meal?.strMealThumb }} style={styles.image} />
-          <Text>{meal?.strMeal}</Text>
-          <Text>INGREDIENTS</Text>
-          {meal?.ingredients.map((i, index) =>
-            <Text key={index.toString()}>{i}</Text>
-          )}
-          <Text>STEPS</Text>
-          <Text>{meal?.strInstructions}</Text>
+          <Text style={[globalStyles.title, styles.spacedTop]}>
+            {meal?.strMeal}
+          </Text>
+          <Text style={[globalStyles.title, styles.sectionTitle]}>
+            INGREDIENTS
+          </Text>
+          {meal?.ingredients.map((i, index) => (
+            <Text
+              key={index.toString()}
+              style={[globalStyles.text, styles.listItem]}
+            >
+              • {i}
+            </Text>
+          ))}
+          <Text style={[globalStyles.title, styles.sectionTitle]}>STEPS</Text>
+          <Text style={[globalStyles.text, styles.instructions]}>
+            {meal?.strInstructions}
+          </Text>
         </View>
       )}
     </ScrollView>
@@ -84,37 +111,37 @@ export default function DetailsScreen({ route, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#ffffff",
-    padding: 20,
+  scrollContent: {
+    paddingBottom: 40,
   },
-  center: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  idText: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  button: {
-    backgroundColor: "#007aff",
+  backButton: {
     padding: 15,
-    borderRadius: 8,
-    alignItems: "center",
   },
-  buttonText: {
-    color: "#ffffff",
-    fontSize: 16,
+  backHomeBtn: {
+    marginTop: 16,
+    width: "80%",
   },
-  error: {
-    fontSize: 16,
-    color: "red",
-    marginBottom: 20,
+  content: {
+    paddingHorizontal: 20,
+  },
+  spacedTop: {
+    marginTop: 10,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    marginTop: 24,
+    marginBottom: 8,
+  },
+  listItem: {
+    marginBottom: 4,
+  },
+  instructions: {
+    lineHeight: 22,
   },
   image: {
-    width: 300,
-    height: 200,
+    width: "100%",
+    height: 220,
+    borderRadius: 16,
+    backgroundColor: colors.gray100,
   },
 });
