@@ -5,7 +5,8 @@ export const colors = {
   border: '#C6E6FF',
   focusRing: '#6A59FA',
 
-  gray500: '#8A8A8A',
+  placeholder: '#8A8A8A',
+  black: '#000',
 
   // Colori semantici per alert/status
   success: '#2E7D32',

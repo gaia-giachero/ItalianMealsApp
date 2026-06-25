@@ -64,7 +64,7 @@ export default function DetailsScreen({ route, navigation }: any) {
       contentContainerStyle={styles.scrollContent}
     >
       <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back" size={24} color={colors.gray500} />
+        <Ionicons name="arrow-back" size={24} color={colors.black} />
       </Pressable>
 
       {loading ? (
@@ -142,6 +142,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 220,
     borderRadius: 16,
-    backgroundColor: colors.gray500,
+    backgroundColor: colors.placeholder,
   },
 });

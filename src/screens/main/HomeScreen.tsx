@@ -101,7 +101,7 @@ export default function HomeScreen({ navigation, route }: any) {
     item.strMeal.toLowerCase().includes(search.toLowerCase()),
   );
 
-  function cancelField(){
+  function cancelField() {
     setSearch("");
   }
 
@@ -117,31 +117,38 @@ export default function HomeScreen({ navigation, route }: any) {
   return (
     <View style={globalStyles.container}>
       <View style={globalStyles.header}>
-        <View style={styles.avatarContainer}>
-          <Image source={{ uri: avatar }} style={styles.avatar} />
+        <View style={styles.avatarName}>
+          <View style={styles.avatarContainer}>
+            <Image source={{ uri: avatar }} style={styles.avatar} />
+          </View>
+          <Text style={styles.nomeCognome}>{name}</Text>
         </View>
-        <Text style={[globalStyles.title, styles.headerTitle]}>{name}</Text>
         <Pressable onPress={logout}>
-          <Ionicons name="log-out-outline" size={24} color={colors.gray500} />
+          <Ionicons name="log-out-outline" size={25} color="black" />
         </Pressable>
       </View>
       <View style={styles.body}>
         {loading ? (
           <View style={globalStyles.centered}>
             <ActivityIndicator size="small" color={colors.primaryAction} />
-            <Text style={[globalStyles.text, styles.spacedTop]}>Caricamento dei piatti in corso...</Text>
+            <Text style={[globalStyles.text, styles.spacedTop]}>
+              Caricamento dei piatti in corso...
+            </Text>
           </View>
         ) : err ? (
           <View style={globalStyles.centered}>
             <Pressable onPress={meals}>
               <Ionicons name="refresh" size={24} color={colors.primaryAction} />
             </Pressable>
-            <Text style={[globalStyles.text, styles.spacedTop]}>Riprova ricaricando la pagina</Text>
+            <Text style={[globalStyles.text, styles.spacedTop]}>
+              Riprova ricaricando la pagina
+            </Text>
           </View>
         ) : (
-          <View style={styles.body}>
+          <View style={[styles.body, styles.listWrapper]}>
             <SearchBar onChangeSearch={setSearch} textSearch={search} />
             <FlatList
+              style={styles.flatList}
               data={filteredMeals}
               keyExtractor={(item) => item.idMeal}
               renderItem={({ item }) => {
@@ -179,15 +186,32 @@ const styles = StyleSheet.create({
   spacedTop: {
     marginTop: 10,
   },
+  avatarName: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  nomeCognome: {
+    fontSize: 18,
+    fontWeight: "700",
+    letterSpacing: 0.9,
+    color: "#000",
+  },
   avatarContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 51.96,
+    height: 51.96,
+    borderRadius: 26,
     overflow: "hidden",
-    backgroundColor: colors.gray500,
+    backgroundColor: colors.placeholder,
   },
   avatar: {
-    width: 50,
-    height: 50,
+    width: 51.96,
+    height: 51.96,
+  },
+  listWrapper: {
+    paddingBottom: 87, // altezza barra (67) + respiro (20)
+  },
+  flatList: {
+    flex: 1,
   },
 });

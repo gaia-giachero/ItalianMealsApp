@@ -11,7 +11,7 @@ interface EyeButtonProps {
 export default function EyeButton({state, toggle, style} : EyeButtonProps){
     return(
         <Pressable onPress={toggle} style={style}>
-            { state ? <Ionicons name="eye" size={24} color={colors.gray500} /> : <Ionicons name="eye-off" size={24} color={colors.gray500} /> }
+            { state ? <Ionicons name="eye" size={24} color={colors.placeholder} /> : <Ionicons name="eye-off" size={24} color={colors.placeholder} /> }
         </Pressable>
 
     ) 

@@ -28,7 +28,7 @@ export default function MealCard({
         <Ionicons
           name={isFavorite ? "heart" : "heart-outline"}
           size={32}
-          color={isFavorite ? colors.error : colors.gray500}
+          color={isFavorite ? colors.error : colors.black}
         />
       </Pressable>
     </View>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderStyle: "solid",
-    borderColor: colors.gray500,
+    borderColor: colors.placeholder,
     borderWidth: 1,
     borderRadius: 5,
     height: 45,

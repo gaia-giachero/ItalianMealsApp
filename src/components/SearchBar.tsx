@@ -11,13 +11,13 @@ interface search {
 export default function SearchBar({ textSearch, onChangeSearch }: search) {
   return (
     <View style={styles.wrapper}>
-      <Ionicons name="search" size={18} color={colors.gray500} style={styles.iconLeft} />
+      <Ionicons name="search" size={18} color={colors.placeholder} style={styles.iconLeft} />
       <TextInput
-        style={[globalStyles.input, styles.input]}
+        style={[globalStyles.search, styles.input]}
         onChangeText={onChangeSearch}
         value={textSearch}
         placeholder="Cerca un piatto..."
-        placeholderTextColor={colors.gray500}
+        placeholderTextColor={colors.placeholder}
       />
       {textSearch.length > 0 && (
         <Pressable
@@ -25,7 +25,7 @@ export default function SearchBar({ textSearch, onChangeSearch }: search) {
           onPress={() => onChangeSearch("")}
           hitSlop={8}
         >
-          <Ionicons name="close-circle" size={18} color={colors.gray500} />
+          <Ionicons name="close-circle" size={18} color={colors.placeholder} />
         </Pressable>
       )}
     </View>

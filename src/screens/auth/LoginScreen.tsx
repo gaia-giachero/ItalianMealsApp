@@ -63,7 +63,7 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
           value={email}
           onChangeText={setEmail}
           placeholder="Email"
-          placeholderTextColor={colors.gray500}
+          placeholderTextColor={colors.placeholder}
           keyboardType="email-address"
           autoCapitalize="none"
         />
@@ -73,7 +73,7 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
             onChangeText={setPassword}
             secureTextEntry={!isPasswordVisible}
             placeholder="Password"
-            placeholderTextColor={colors.gray500}
+            placeholderTextColor={colors.placeholder}
             style={[globalStyles.input, styles.passwordInput]}
           />
           <EyeButton

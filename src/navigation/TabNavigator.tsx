@@ -26,20 +26,21 @@ export default function TabNavigator() {
         headerShown: false,
         sceneStyle: { backgroundColor: colors.primary },
         tabBarStyle: {
-          backgroundColor: "rgba(146, 177, 255, 0.5)",
+          backgroundColor: "rgb(146, 177, 255)",
           borderTopWidth: 0,
           height: 67,
           position: "absolute",
-          left: 20,
-          right: 20,
-          bottom: 20,
+          marginLeft: 15,
+          marginRight: 15,
+          marginBottom: 0,
           borderRadius: 24,
-          elevation: 0,
+          elevation: 10,
           paddingBottom: 0,
+          zIndex: 999,
         },
         tabBarButton: (props) => <CustomTabButton {...props} />,
         tabBarActiveTintColor: colors.primaryAction,
-        tabBarInactiveTintColor: colors.gray500,
+        tabBarInactiveTintColor: colors.black,
       }}
     >
       <Tab.Screen

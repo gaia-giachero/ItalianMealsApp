@@ -11,12 +11,15 @@ export const globalStyles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.surface,
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    gap: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    justifyContent: 'space-between',
+    backgroundColor: '#92b1ff',
+    height: 90,
+    paddingHorizontal: 19,
+    paddingVertical: 19,
+    borderRadius: 20,
+    marginTop: 10,
+    marginRight: 10,
+    marginLeft: 10,
   },
   // Bottone primario
   btn: {
@@ -50,7 +53,7 @@ export const globalStyles = StyleSheet.create({
   // Testo normale
   text: {
     fontSize: 16,
-    color: colors.secondary,
+    color: colors.black,
   },
   // Testo di errore
   errorText: {
@@ -61,13 +64,24 @@ export const globalStyles = StyleSheet.create({
   // Campo di input
   input: {
     borderWidth: 1.5,
-    borderColor: colors.border,
+    borderColor: "rgb(146, 177, 255)",
     borderRadius: 10,
     paddingVertical: 15,
     paddingHorizontal: 20,
     marginBottom: 10,
     fontSize: 16,
-    color: colors.secondary,
+    color: colors.black,
+    backgroundColor: '#FFFFFF',
+  },
+  search: {
+    borderWidth: 1.5,
+    borderColor: "rgb(146, 177, 255)",
+    borderRadius: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginBottom: 10,
+    fontSize: 14,
+    color: colors.black,
     backgroundColor: '#FFFFFF',
   },
   // Pannello/card di sfondo (es. dietro un form), più piccolo della pagina
