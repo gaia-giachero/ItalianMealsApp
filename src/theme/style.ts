@@ -26,7 +26,7 @@ export const globalStyles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 10,
-    backgroundColor: colors.accent,
+    backgroundColor: '#8FA8F8',
     alignItems: 'center',
   },
   // Testo del bottone primario
@@ -87,7 +87,8 @@ export const globalStyles = StyleSheet.create({
   // Pannello/card di sfondo (es. dietro un form), più piccolo della pagina
   panel: {
     width: '92%',
-    backgroundColor: colors.surface,
+    height: '50%',
+    backgroundColor: '#E8E8E8',
     borderRadius: 24,
     paddingVertical: 32,
     paddingHorizontal: 20,
@@ -99,4 +100,8 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  center: {
+    alignItems: 'center',
+    marginTop: 30,
+  }
 });
