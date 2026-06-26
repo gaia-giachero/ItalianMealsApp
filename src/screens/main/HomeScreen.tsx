@@ -1,5 +1,4 @@
-import React from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { fetchItalianMeals } from "../../services/meals";
 
@@ -13,11 +12,13 @@ import {
   Image,
 } from "react-native";
 
+import { AuthContext } from "../../context/AuthContext";
 import MealCard from "../../components/MealCard";
 import SearchBar from "../../components/SearchBar";
 
 import { globalStyles } from "../../theme/style";
 import { colors } from "../../theme/colors";
+import { FavoritesContext } from "../../context/FavoritesContext";
 
 interface Meal {
   idMeal: string;
@@ -26,15 +27,14 @@ interface Meal {
   strMealThumb: string;
 }
 
-export default function HomeScreen({ navigation, route }: any) {
-  const name = route.params?.name;
-  const avatar = route.params?.avatar;
+export default function HomeScreen({ navigation }: any) {
+  const { name, avatarUri, logout } = useContext(AuthContext);
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
 
   // LOADING OF MEALS
   const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
   const [err, setErr] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(false);
-  const isLoaded = React.useRef(false);
 
   async function meals() {
     setErr(undefined);
@@ -53,57 +53,12 @@ export default function HomeScreen({ navigation, route }: any) {
     meals();
   }, []);
 
-  // LOGOUT ACCOUNT
-  function logout() {
-    console.log("LOGOUT");
-  }
-
-  // FAVORITES
-  const [favorites, setFavorites] = React.useState<string[]>([]);
-
-  function toggleFavorite(idMeal: string) {
-    if (favorites.includes(idMeal)) {
-      setFavorites(favorites.filter((id) => id !== idMeal));
-    } else {
-      setFavorites([...favorites, idMeal]);
-    }
-  }
-
-  async function loadFavorites() {
-    try {
-      const favorites = await AsyncStorage.getItem("app:v1:favs");
-      if (favorites !== null) {
-        setFavorites(JSON.parse(favorites));
-      }
-    } catch (_) {}
-    isLoaded.current = true;
-  }
-
-  React.useEffect(() => {
-    loadFavorites();
-  }, []);
-
-  async function saveFavorites() {
-    if (!isLoaded.current) return;
-    try {
-      await AsyncStorage.setItem("app:v1:favs", JSON.stringify(favorites));
-    } catch (_) {}
-  }
-
-  React.useEffect(() => {
-    saveFavorites();
-  }, [favorites]);
-
   // SEARCH AND FILTER
   const [search, setSearch] = React.useState<string>("");
 
   const filteredMeals = mealsItems.filter((item) =>
     item.strMeal.toLowerCase().includes(search.toLowerCase()),
   );
-
-  function cancelField() {
-    setSearch("");
-  }
 
   // REFRESHING FLATLIST
   const [isRefreshing, setIsRefreshing] = React.useState(false);
@@ -119,7 +74,7 @@ export default function HomeScreen({ navigation, route }: any) {
       <View style={globalStyles.header}>
         <View style={styles.avatarName}>
           <View style={styles.avatarContainer}>
-            <Image source={{ uri: avatar }} style={styles.avatar} />
+            <Image source={{ uri: avatarUri }} style={styles.avatar} />
           </View>
           <Text style={styles.nomeCognome}>{name}</Text>
         </View>
