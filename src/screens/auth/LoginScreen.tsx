@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   TextInput,
@@ -11,11 +11,14 @@ import {
 } from "react-native";
 import { validateLogin } from "../../services/auth";
 import EyeButton from "../../components/EyeButton";
+import { AuthContext } from "../../context/AuthContext";
 
 import { globalStyles } from "../../theme/style";
 import { colors } from "../../theme/colors";
 
-export default function LoginScreen({ navigation }: { navigation: any }) {
+export default function LoginScreen() {
+  const { login } = useContext(AuthContext);
+
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -37,13 +40,7 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
       setIsLoading(false);
       setEmail("");
       setPassword("");
-      navigation.navigate("MainTab", {
-        screen: "Home",
-        params: {
-          name: userFound.name,
-          avatar: userFound.avatarUri,
-        },
-      });
+      login(email, password)
     } else {
       setIsLoading(false);
       setError("Email o password non valide! Riprova!");
@@ -83,9 +80,7 @@ export default function LoginScreen({ navigation }: { navigation: any }) {
           />
         </View>
         {error !== "" && (
-          <Text style={[globalStyles.errorText, styles.form]}>
-            {error}
-          </Text>
+          <Text style={[globalStyles.errorText, styles.form]}>{error}</Text>
         )}
         <Pressable
           style={[globalStyles.btn, styles.form]}
