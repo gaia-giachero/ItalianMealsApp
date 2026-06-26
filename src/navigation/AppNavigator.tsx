@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { AuthContext } from "../context/AuthContext";
 import LoginScreen from "../screens/auth/LoginScreen";
 import DetailsScreen from "../screens/main/DetailScreen";
 import TabNavigator from "./TabNavigator";
@@ -21,6 +22,7 @@ const linking = {
 };
 
 export default function AppNavigator() {
+  const { isLogged } = useContext(AuthContext);
   return (
     <NavigationContainer linking={linking}>
       <Stack.Navigator
@@ -29,9 +31,14 @@ export default function AppNavigator() {
           contentStyle: { backgroundColor: colors.primary },
         }}
       >
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="MainTab" component={TabNavigator} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        {isLogged ? (
+          <>
+            <Stack.Screen name="MainTab" component={TabNavigator} />
+            <Stack.Screen name="Details" component={DetailsScreen} />
+          </>
+        ) : (
+          <Stack.Screen name="Login" component={LoginScreen} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
