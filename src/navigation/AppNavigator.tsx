@@ -16,7 +16,7 @@ const linking = {
     screens: {
       Login: "login",
       MainTab: "main tab",
-      Details: "dettagli/:id",
+      Details: "meal/:idMeal",
     },
   },
 };
