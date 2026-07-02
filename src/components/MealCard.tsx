@@ -1,36 +1,36 @@
-import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useContext } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../theme/colors";
+import FavButton from "./FavButton";
+import { FavoritesContext } from "../context/FavoritesContext";
 
 interface MealCardProps {
+  idMeal: string;
   strMeal: string;
   strMealThumb: string;
   onPress: () => void;
-  isFavorite: boolean;
-  onToggleFavorite: () => void;
 }
 
+
 export default function MealCard({
+  idMeal, 
   strMeal,
   strMealThumb,
-  onPress,
-  isFavorite,
-  onToggleFavorite,
+  onPress
 }: MealCardProps) {
+
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
   return (
     <View style={styles.card}>
       <Pressable onPress={onPress} style={styles.direction}>
         <Image source={{ uri: strMealThumb }} style={styles.image} />
         <Text style={styles.title}>{strMeal}</Text>
       </Pressable>
-      <Pressable onPress={onToggleFavorite} style={styles.prefer}>
-        <Ionicons
-          name={isFavorite ? "heart" : "heart-outline"}
-          size={32}
-          color={isFavorite ? colors.error : colors.black}
-        />
-      </Pressable>
+      <FavButton
+        isFavorite={favorites.includes(idMeal)}
+        onToggleFavorite={() => toggleFavorite(idMeal)}
+      />
     </View>
   );
 }
