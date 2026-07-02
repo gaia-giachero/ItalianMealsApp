@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Text,
   Pressable,
@@ -12,6 +12,8 @@ import { fetchMealById } from "../../services/meals";
 import { Ionicons } from "@expo/vector-icons";
 import { globalStyles } from "../../theme/style";
 import { colors } from "../../theme/colors";
+import FavButton from "../../components/FavButton";
+import { FavoritesContext } from "../../context/FavoritesContext";
 
 interface DetailsMeals {
   strMeal: string;
@@ -58,6 +60,8 @@ export default function DetailsScreen({ route, navigation }: any) {
     );
   }
 
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
   return (
     <ScrollView
       style={globalStyles.container}
@@ -87,6 +91,10 @@ export default function DetailsScreen({ route, navigation }: any) {
         <View style={styles.content}>
           <View>
             <Image source={{ uri: meal?.strMealThumb }} style={styles.image} />
+            <FavButton
+              isFavorite={favorites.includes(id)}
+              onToggleFavorite={() => toggleFavorite(id)}
+            />
           </View>
           <Text style={[globalStyles.title, styles.spacedTop]}>
             {meal?.strMeal}
