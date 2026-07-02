@@ -67,9 +67,6 @@ export default function DetailsScreen({ route, navigation }: any) {
       style={globalStyles.container}
       contentContainerStyle={styles.scrollContent}
     >
-      <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back" size={24} color={colors.black} />
-      </Pressable>
 
       {loading ? (
         <View style={globalStyles.centered}>
@@ -84,32 +81,47 @@ export default function DetailsScreen({ route, navigation }: any) {
             <Ionicons name="refresh" size={24} color={colors.primaryAction} />
           </Pressable>
           <Text style={[globalStyles.text, styles.spacedTop]}>
-            Riprova ricaricando la pagina
+            Riprova ricaricando la pagina o torna alla HomePage
           </Text>
+          {/* implementare bottone o altro modo per tornare alla homepage */}
         </View>
       ) : (
         <View style={styles.content}>
-          <View>
+          {/* HEADER */}
+          <View style={styles.imageContainer}>
             <Image source={{ uri: meal?.strMealThumb }} style={styles.image} />
-            <FavButton
-              isFavorite={favorites.includes(id)}
-              onToggleFavorite={() => toggleFavorite(id)}
-            />
+            <View style={styles.imageOverlay}>
+              <Pressable style={styles.backBtn} onPress={() => navigation.goBack()}>
+                <Ionicons name="arrow-back" size={24} color={colors.black} />
+              </Pressable>
+              <FavButton
+                isFavorite={favorites.includes(id)}
+                onToggleFavorite={() => toggleFavorite(id)}
+              />
+            </View>
           </View>
+
+          {/* TITLE */}
           <Text style={[globalStyles.title, styles.spacedTop]}>
             {meal?.strMeal}
           </Text>
-          <Text style={[globalStyles.title, styles.sectionTitle]}>
-            INGREDIENTS
-          </Text>
-          {meal?.ingredients.map((i, index) => (
-            <Text
-              key={index.toString()}
-              style={[globalStyles.text, styles.listItem]}
-            >
-              • {i}
+
+          {/* INGREDIENTS */}
+          <View style={styles.container}>
+            <Text style={[globalStyles.title, styles.sectionTitle, { color: 'white' }]}>
+              INGREDIENTS
             </Text>
-          ))}
+            {meal?.ingredients.map((i, index) => (
+              <Text
+                key={index.toString()}
+                style={[globalStyles.text, styles.listItem]}
+              >
+                • {i}
+              </Text>
+            ))}
+          </View>
+
+          {/* STEPS */}
           <Text style={[globalStyles.title, styles.sectionTitle]}>STEPS</Text>
           <Text style={[globalStyles.text, styles.instructions]}>
             {meal?.strInstructions}
@@ -126,6 +138,12 @@ const styles = StyleSheet.create({
   },
   backButton: {
     padding: 15,
+    backgroundColor: '#c2c2c2',
+    width: 50,
+    height: 50,
+    borderRadius: '100%',
+    margin: 5,
+    textAlign: 'center',
   },
   backHomeBtn: {
     marginTop: 16,
@@ -144,14 +162,45 @@ const styles = StyleSheet.create({
   },
   listItem: {
     marginBottom: 4,
+    color: 'white'
   },
   instructions: {
     lineHeight: 22,
   },
+  container: {
+    backgroundColor: colors.accent,
+    paddingLeft: 30,
+    paddingBottom: 30,
+    borderRadius: 20,
+    marginTop: 10,
+  },
+
+  imageContainer: {
+    width: "100%",
+    height: 300,
+    position: "relative",
+  },
   image: {
     width: "100%",
-    height: 220,
-    borderRadius: 16,
-    backgroundColor: colors.placeholder,
+    height: 300,
+    borderBottomLeftRadius: 35,
+    borderBottomRightRadius: 35,
+  },
+  imageOverlay: {
+    position: "absolute",
+    top: 46,
+    left: 16,
+    right: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  backBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    backgroundColor: "rgba(255,255,255,0.8)",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
