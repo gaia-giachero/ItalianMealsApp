@@ -114,10 +114,9 @@ export default function FavouriteScreen({ navigation }: any) {
                       id: item.idMeal,
                     })
                   }
+                  idMeal={item.idMeal}
                   strMeal={item.strMeal}
                   strMealThumb={item.strMealThumb}
-                  isFavorite={true}
-                  onToggleFavorite={() => toggleFavorite(item.idMeal)}
                 />
               )}
               refreshing={isRefreshing}
