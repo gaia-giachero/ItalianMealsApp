@@ -18,7 +18,6 @@ import SearchBar from "../../components/SearchBar";
 
 import { globalStyles } from "../../theme/style";
 import { colors } from "../../theme/colors";
-import { FavoritesContext } from "../../context/FavoritesContext";
 
 interface Meal {
   idMeal: string;
@@ -29,7 +28,6 @@ interface Meal {
 
 export default function HomeScreen({ navigation }: any) {
   const { name, avatarUri, logout } = useContext(AuthContext);
-  const { favorites, toggleFavorite } = useContext(FavoritesContext);
 
   // LOADING OF MEALS
   const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
@@ -111,13 +109,12 @@ export default function HomeScreen({ navigation }: any) {
                   <MealCard
                     onPress={() =>
                       navigation.navigate("Details", {
-                        id: item.idMeal,
+                        idMeal: item.idMeal,
                       })
                     }
+                    idMeal={item.idMeal}
                     strMeal={item.strMeal}
                     strMealThumb={item.strMealThumb}
-                    isFavorite={favorites.includes(item.idMeal)}
-                    onToggleFavorite={() => toggleFavorite(item.idMeal)}
                   />
                 );
               }}
