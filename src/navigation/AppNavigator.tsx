@@ -7,11 +7,12 @@ import LoginScreen from "../screens/auth/LoginScreen";
 import DetailsScreen from "../screens/main/DetailScreen";
 import TabNavigator from "./TabNavigator";
 import { colors } from "../theme/colors";
+import * as Linking from 'expo-linking';
 
 const Stack = createNativeStackNavigator();
 
 const linking = {
-  prefixes: ["exp://"],
+  prefixes: [Linking.createURL("/"), "italiamealsapp://"],
   config: {
     screens: {
       Login: "login",
