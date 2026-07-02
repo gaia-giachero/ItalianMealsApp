@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -14,7 +13,7 @@ import { colors } from "../../theme/colors";
 import { FavoritesContext } from "../../context/FavoritesContext";
 import { fetchItalianMeals } from "../../services/meals";
 import MealCard from "../../components/MealCard";
-import { AuthContext } from "../../context/AuthContext";
+import HeaderProfile from "../../components/HeaderProfile";
 
 interface Meal {
   idMeal: string;
@@ -24,7 +23,6 @@ interface Meal {
 }
 
 export default function FavouriteScreen({ navigation }: any) {
-  const { name, avatarUri, logout } = useContext(AuthContext);
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
 
   const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
@@ -56,7 +54,7 @@ export default function FavouriteScreen({ navigation }: any) {
     setIsRefreshing(false);
   }
 
-  // ✅ FILTRO CORRETTO
+  // FILTRO 
   const filteredMeals = mealsItems.filter((item) =>
     favorites.includes(item.idMeal),
   );
@@ -64,18 +62,7 @@ export default function FavouriteScreen({ navigation }: any) {
   return (
     <View style={globalStyles.container}>
       {/* HEADER */}
-      <View style={globalStyles.header}>
-        <View style={styles.avatarName}>
-          <View style={styles.avatarContainer}>
-            <Image source={{ uri: avatarUri }} style={styles.avatar} />
-          </View>
-          <Text style={styles.nomeCognome}>{name}</Text>
-        </View>
-        <Pressable onPress={logout}>
-          <Ionicons name="log-out-outline" size={25} color="black" />
-        </Pressable>
-      </View>
-
+      <HeaderProfile />
       <View style={styles.body}>
         {/* LOADING */}
         {loading ? (
@@ -111,7 +98,7 @@ export default function FavouriteScreen({ navigation }: any) {
                 <MealCard
                   onPress={() =>
                     navigation.navigate("Details", {
-                      id: item.idMeal,
+                      idMeal: item.idMeal,
                     })
                   }
                   idMeal={item.idMeal}
@@ -135,28 +122,6 @@ const styles = StyleSheet.create({
   },
   spacedTop: {
     marginTop: 10,
-  },
-  avatarName: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  nomeCognome: {
-    fontSize: 18,
-    fontWeight: "700",
-    letterSpacing: 0.9,
-    color: "#000",
-  },
-  avatarContainer: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    overflow: "hidden",
-    backgroundColor: colors.placeholder,
-  },
-  avatar: {
-    width: 52,
-    height: 52,
   },
   listWrapper: {
     marginTop: 10,
