@@ -21,9 +21,9 @@ interface DetailsMeals {
 }
 
 export default function DetailsScreen({ route, navigation }: any) {
-  const id = route.params?.id;
+  const id = route.params?.idMeal;
 
-  const [meal, setMeal] = React.useState<DetailsMeals | undefined>(undefined);
+  const [meal, setMeal] = React.useState<DetailsMeals>();
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | undefined>(undefined);
 
@@ -85,7 +85,9 @@ export default function DetailsScreen({ route, navigation }: any) {
         </View>
       ) : (
         <View style={styles.content}>
-          <Image source={{ uri: meal?.strMealThumb }} style={styles.image} />
+          <View>
+            <Image source={{ uri: meal?.strMealThumb }} style={styles.image} />
+          </View>
           <Text style={[globalStyles.title, styles.spacedTop]}>
             {meal?.strMeal}
           </Text>
