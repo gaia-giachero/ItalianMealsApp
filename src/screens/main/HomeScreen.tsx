@@ -8,16 +8,15 @@ import {
   Pressable,
   Text,
   StyleSheet,
-  ActivityIndicator,
-  Image,
+  ActivityIndicator
 } from "react-native";
 
-import { AuthContext } from "../../context/AuthContext";
 import MealCard from "../../components/MealCard";
 import SearchBar from "../../components/SearchBar";
 
 import { globalStyles } from "../../theme/style";
 import { colors } from "../../theme/colors";
+import HeaderProfile from "../../components/HeaderProfile";
 
 interface Meal {
   idMeal: string;
@@ -27,8 +26,6 @@ interface Meal {
 }
 
 export default function HomeScreen({ navigation }: any) {
-  const { name, avatarUri, logout } = useContext(AuthContext);
-
   // LOADING OF MEALS
   const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
   const [err, setErr] = React.useState<string>();
@@ -69,17 +66,7 @@ export default function HomeScreen({ navigation }: any) {
 
   return (
     <View style={globalStyles.container}>
-      <View style={globalStyles.header}>
-        <View style={styles.avatarName}>
-          <View style={styles.avatarContainer}>
-            <Image source={{ uri: avatarUri }} style={styles.avatar} />
-          </View>
-          <Text style={styles.nomeCognome}>{name}</Text>
-        </View>
-        <Pressable onPress={logout}>
-          <Ionicons name="log-out-outline" size={25} color="black" />
-        </Pressable>
-      </View>
+      <HeaderProfile />
       <View style={styles.body}>
         {loading ? (
           <View style={globalStyles.centered}>
@@ -137,28 +124,6 @@ const styles = StyleSheet.create({
   },
   spacedTop: {
     marginTop: 10,
-  },
-  avatarName: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  nomeCognome: {
-    fontSize: 18,
-    fontWeight: "700",
-    letterSpacing: 0.9,
-    color: "#000",
-  },
-  avatarContainer: {
-    width: 51.96,
-    height: 51.96,
-    borderRadius: 26,
-    overflow: "hidden",
-    backgroundColor: colors.placeholder,
-  },
-  avatar: {
-    width: 51.96,
-    height: 51.96,
   },
   listWrapper: {
     paddingBottom: 87, // altezza barra (67) + respiro (20)
