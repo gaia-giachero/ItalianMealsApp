@@ -31,7 +31,7 @@
 ### Architettura e configurazione
 
 | File | Fatto | Cosa |
-|------|:-----:|------|
+|------|-------|------|
 | `App.tsx` | [x] | Entry point con `SafeAreaProvider`, `AuthProvider`, `FavoritesProvider`, `AppNavigator` |
 | `AppNavigator.tsx` | [x] | Stack Login / MainTab / Details con `NavigationContainer` e config `linking` |
 | `AppNavigator.tsx` | [x] | Path deep link `meal/:idMeal` |
@@ -42,21 +42,21 @@
 ### Context e stato globale
 
 | File | Fatto | Cosa |
-|------|:-----:|------|
+|------|-------|------|
 | `AuthContext.tsx` | [x] | Sessione utente (`isLogged`, `name`, `avatarUri`, `login`, `logout`) |
 | `FavoritesContext.tsx` | [x] | Preferiti condivisi con `AsyncStorage`, load all'avvio e save automatico |
 
 ### Services e hooks
 
 | File | Fatto | Cosa |
-|------|:-----:|------|
+|------|-------|------|
 | `auth.ts` | [x] | `MOCK_USERS` con 3 utenti e `validateLogin()` con `trim()` sull'email |
 | `meals.ts` | [x] | `fetchItalianMeals()` e `fetchMealById()` con controllo `res.ok` e parsing ingredienti |
 
 ### Componenti riutilizzabili
 
 | File | Fatto | Cosa |
-|------|:-----:|------|
+|------|-------|------|
 | `MealCard.tsx` | [x] | Card con immagine, titolo, toggle preferito |
 | `SearchBar.tsx` | [x] | Input ricerca con icona e pulsante reset |
 | `EyeButton.tsx` | [x] | Toggle visibilità password |
@@ -64,7 +64,7 @@
 ### Schermate
 
 | File | Fatto | Cosa |
-|------|:-----:|------|
+|------|-------|------|
 | `LoginScreen.tsx` | [x] | Form controllato, validazione campi vuoti, errore credenziali, `ActivityIndicator`, `EyeButton` |
 | `LoginScreen.tsx` | [ ] | Stile da rifinire |
 | `HomeScreen.tsx` | [x] | Header avatar + nome, `FlatList` con `SearchBar`, loading / error / retry, navigazione al dettaglio, pull-to-refresh |
@@ -81,7 +81,7 @@
 ### Requisiti obbligatori rimanenti
 
 | Requisito | Fatto | Note |
-|-----------|:-----:|------|
+|-----------|-------|------|
 | Accessibilità | [ ] | Aggiungere `accessibilityLabel` su almeno 2 elementi interattivi |
 | Deep link | [x] | Testare con `npx uri-scheme open "exp://10.0.2.2:8081/--/meal/52772" --android` dopo fix path |
 | Screenshot | [ ] | Salvare tutte le schermate in `docs/screenshots/` e aggiornare la tabella sopra |
