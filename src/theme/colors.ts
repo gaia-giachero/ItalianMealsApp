@@ -1,25 +1,29 @@
-export const colors = {
-  // Color tokens principali
-  primaryAction: '#6A59FA',
-  surface: '#FEDADA',
-  border: '#C6E6FF',
-  focusRing: '#6A59FA',
+const lightColors = {
+  primary: '#FFF',       // sfondo pagine
+  primaryAction: '#6A59FA', // bottoni, spinner, tab attiva
+  accent: '#6A59FA',        // bordi, bottone outline
+  secondary: '#453284',     // testi titoli
+  black: '#000000',         // testi normali, icone
+  placeholder: '#8A8A8A',   // icone secondarie, bordi, placeholder
+  error: '#C62828',         // errori, cuore preferiti
+};
 
-  placeholder: '#8A8A8A',
-  black: '#000',
+const darkColors = {
+  primary: '#121212',       // sfondo pagine
+  primaryAction: '#6A59FA', // invariato — colore di brand
+  accent: '#6A59FA',        // invariato — colore di brand
+  secondary: '#9D8FE8',     // testi titoli, più chiaro per contrasto
+  black: '#FFFFFF',         // testi normali, icone — invertito
+  placeholder: '#A0A0A0',   // leggermente più chiaro per leggibilità su scuro
+  error: '#C62828',         // invariato — colore semantico
+};
 
-  // Colori semantici per alert/status
-  success: '#2E7D32',
-  successBg: '#E3F2E3',
-  info: '#1565C0',
-  infoBg: '#E3EEFB',
-  warning: '#ffb700',
-  warningBg: '#FBF1D6',
-  error: '#C62828',
-  errorBg: '#FBE3E3',
+export type AppColors = typeof lightColors;
 
-  // Alias retro-compatibili usati nel resto dell'app
-  primary: '#FEDADA',
-  secondary: '#453284',
-  accent: '#6A59FA',
-}
+export const themes = {
+  light: lightColors,
+  dark: darkColors,
+};
+
+// Default — verrà sostituito dinamicamente da SettingsContext
+export const colors = lightColors;

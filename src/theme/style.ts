@@ -5,7 +5,7 @@ export const globalStyles = StyleSheet.create({
   // View esterna che avvolge ogni schermata
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
   },
   // Header con avatar (HomeScreen, ecc.)
   header: {
