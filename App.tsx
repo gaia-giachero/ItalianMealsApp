@@ -7,17 +7,20 @@ import FavoritesProvider from "./src/context/FavoritesContext";
 import AppNavigator from "./src/navigation/AppNavigator";
 
 import { globalStyles } from "./src/theme/style";
+import SettingProvider from "./src/context/SettingContext";
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={globalStyles.container}>
-        <AuthProvider>
-          <FavoritesProvider>
-            <AppNavigator />
-          </FavoritesProvider>
-        </AuthProvider>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <SettingProvider>
+      <SafeAreaProvider>
+        <SafeAreaView style={globalStyles.container}>
+          <AuthProvider>
+            <FavoritesProvider>
+              <AppNavigator />
+            </FavoritesProvider>
+          </AuthProvider>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </SettingProvider>
   );
 }
