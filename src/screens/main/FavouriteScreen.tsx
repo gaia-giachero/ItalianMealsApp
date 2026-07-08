@@ -14,6 +14,7 @@ import { FavoritesContext } from "../../context/FavoritesContext";
 import { fetchItalianMeals } from "../../services/meals";
 import MealCard from "../../components/MealCard";
 import HeaderProfile from "../../components/HeaderProfile";
+import { SettingContext } from "../../context/SettingContext";
 
 interface Meal {
   idMeal: string;
@@ -24,6 +25,7 @@ interface Meal {
 
 export default function FavouriteScreen({ navigation }: any) {
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
+  const { currentColors } = useContext(SettingContext)
 
   const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
   const [err, setErr] = React.useState<string>();
@@ -76,7 +78,7 @@ export default function FavouriteScreen({ navigation }: any) {
         err ? (
           <View style={globalStyles.centered}>
             <Pressable onPress={meals}>
-              <Ionicons name="refresh" size={24} color={colors.primaryAction} />
+              <Ionicons name="refresh" size={24} color={currentColors.primaryAction} />
             </Pressable>
             <Text style={[globalStyles.text, styles.spacedTop]}>{err}</Text>
           </View>

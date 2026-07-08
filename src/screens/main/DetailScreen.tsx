@@ -10,10 +10,11 @@ import {
 } from "react-native";
 import { fetchMealById } from "../../services/meals";
 import { Ionicons } from "@expo/vector-icons";
-import { globalStyles } from "../../theme/style";
+import { getGlobalStyles } from "../../theme/style";
 import { colors } from "../../theme/colors";
 import FavButton from "../../components/FavButton";
 import { FavoritesContext } from "../../context/FavoritesContext";
+import { SettingContext } from "../../context/SettingContext";
 
 interface DetailsMeals {
   strMeal: string;
@@ -24,6 +25,8 @@ interface DetailsMeals {
 
 export default function DetailsScreen({ route, navigation }: any) {
   const id = route.params?.idMeal;
+  const { currentColors } = useContext(SettingContext);
+  const globalStyles = getGlobalStyles(currentColors);
 
   const [meal, setMeal] = React.useState<DetailsMeals>();
   const [loading, setLoading] = React.useState(true);
@@ -107,7 +110,7 @@ export default function DetailsScreen({ route, navigation }: any) {
           </Text>
 
           {/* INGREDIENTS */}
-          <View style={styles.container}>
+          <View style={[styles.container, {backgroundColor: currentColors.accent}]}>
             <Text style={[globalStyles.title, styles.sectionTitle, { color: 'white' }]}>
               INGREDIENTS
             </Text>
@@ -168,7 +171,6 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   container: {
-    backgroundColor: colors.accent,
     paddingLeft: 30,
     paddingBottom: 30,
     borderRadius: 20,
@@ -183,12 +185,13 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 300,
-    borderBottomLeftRadius: 35,
-    borderBottomRightRadius: 35,
+    // borderBottomLeftRadius: 35,
+    // borderBottomRightRadius: 35,
+    borderRadius: 35,
   },
   imageOverlay: {
     position: "absolute",
-    top: 46,
+    top: 26,
     left: 16,
     right: 16,
     flexDirection: "row",

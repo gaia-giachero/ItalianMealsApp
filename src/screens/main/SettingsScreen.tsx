@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Switch,
   Pressable,
-  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { globalStyles } from "../../theme/style";

@@ -8,6 +8,7 @@ import DetailsScreen from "../screens/main/DetailScreen";
 import TabNavigator from "./TabNavigator";
 import { colors } from "../theme/colors";
 import * as Linking from 'expo-linking';
+import { SettingContext } from "../context/SettingContext";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,12 +25,14 @@ const linking = {
 
 export default function AppNavigator() {
   const { isLogged } = useContext(AuthContext);
+  const { currentColors } = useContext(SettingContext)
+
   return (
     <NavigationContainer linking={linking}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: colors.primary },
+          contentStyle: { backgroundColor: currentColors.primary },
         }}
       >
         {isLogged ? (

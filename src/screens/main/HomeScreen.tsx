@@ -17,6 +17,7 @@ import SearchBar from "../../components/SearchBar";
 import { globalStyles } from "../../theme/style";
 import { colors } from "../../theme/colors";
 import HeaderProfile from "../../components/HeaderProfile";
+import { SettingContext } from "../../context/SettingContext";
 
 interface Meal {
   idMeal: string;
@@ -64,13 +65,16 @@ export default function HomeScreen({ navigation }: any) {
     setIsRefreshing(false);
   }
 
+  // COLORS STYLE
+  const { currentColors } = useContext(SettingContext)
+
   return (
     <View style={globalStyles.container}>
       <HeaderProfile />
       <View style={styles.body}>
         {loading ? (
           <View style={globalStyles.centered}>
-            <ActivityIndicator size="small" color={colors.primaryAction} />
+            <ActivityIndicator size="small" color={currentColors.primaryAction} />
             <Text style={[globalStyles.text, styles.spacedTop]}>
               Caricamento dei piatti in corso...
             </Text>
@@ -78,7 +82,7 @@ export default function HomeScreen({ navigation }: any) {
         ) : err ? (
           <View style={globalStyles.centered}>
             <Pressable onPress={meals}>
-              <Ionicons name="refresh" size={24} color={colors.primaryAction} />
+              <Ionicons name="refresh" size={24} color={currentColors.primaryAction} />
             </Pressable>
             <Text style={[globalStyles.text, styles.spacedTop]}>
               Riprova ricaricando la pagina

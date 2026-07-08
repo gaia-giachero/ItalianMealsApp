@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderStyle: "solid",
     borderColor: colors.placeholder,
+    backgroundColor: '#fff',
     borderWidth: 1,
     borderRadius: 5,
     height: 45,

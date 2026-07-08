@@ -1,18 +1,19 @@
 import { StyleSheet } from 'react-native';
-import { colors } from './colors'
+import { AppColors } from './colors'
 
-export const globalStyles = StyleSheet.create({
+export const getGlobalStyles = (colors: AppColors) =>
+  StyleSheet.create({
   // View esterna che avvolge ogni schermata
   container: {
     flex: 1,
-    // backgroundColor: '#fff',
+    backgroundColor: colors.primary,
   },
   // Header con avatar (HomeScreen, ecc.)
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#92b1ff',
+    backgroundColor: colors.primaryAction,
     height: 90,
     paddingHorizontal: 19,
     paddingVertical: 19,
@@ -26,7 +27,7 @@ export const globalStyles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 10,
-    backgroundColor: '#8FA8F8',
+    backgroundColor: colors.primaryAction,
     alignItems: 'center',
   },
   // Testo del bottone primario
@@ -64,25 +65,25 @@ export const globalStyles = StyleSheet.create({
   // Campo di input
   input: {
     borderWidth: 1.5,
-    borderColor: "rgb(146, 177, 255)",
+    borderColor: colors.accent,
     borderRadius: 10,
     paddingVertical: 15,
     paddingHorizontal: 20,
     marginBottom: 10,
     fontSize: 16,
     color: colors.black,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.primary,
   },
   search: {
     borderWidth: 1.5,
-    borderColor: "rgb(146, 177, 255)",
+    borderColor: colors.accent,
     borderRadius: 30,
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginBottom: 10,
     fontSize: 14,
     color: colors.black,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.primary,
   },
   // Pannello/card di sfondo (es. dietro un form), più piccolo della pagina
   panel: {

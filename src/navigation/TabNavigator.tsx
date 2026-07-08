@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, View, StyleSheet } from "react-native";
@@ -7,6 +7,7 @@ import HomeScreen from "../screens/main/HomeScreen";
 import SettingScreen from "../screens/main/SettingsScreen";
 import { colors } from "../theme/colors";
 import FavouriteScreen from "../screens/main/FavouriteScreen";
+import { SettingContext } from "../context/SettingContext";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,27 +20,29 @@ function CustomTabButton(props: any) {
 }
 
 export default function TabNavigator() {
+  const { currentColors } = useContext(SettingContext)
+
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
         headerShown: false,
-        sceneStyle: { backgroundColor: colors.primary },
+        sceneStyle: { backgroundColor: currentColors.primary },
         tabBarStyle: {
-          backgroundColor: "rgb(146, 177, 255)",
+          backgroundColor: currentColors.primaryAction,
           borderTopWidth: 0,
           height: 67,
           position: "absolute",
           marginLeft: 15,
           marginRight: 15,
           marginBottom: 0,
-          borderRadius: 24,
+          borderRadius: 24, 
           elevation: 10,
           paddingBottom: 0,
           zIndex: 999,
         },
         tabBarButton: (props) => <CustomTabButton {...props} />,
-        tabBarActiveTintColor: colors.primaryAction,
+        tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.black,
       }}
     >
