@@ -52,6 +52,7 @@ export default function TabNavigator() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
+          tabBarAccessibilityLabel: "Home",
         }}
       />
       <Tab.Screen
@@ -61,6 +62,7 @@ export default function TabNavigator() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart" size={size} color={color} />
           ),
+          tabBarAccessibilityLabel: "Favourite",
         }}
       />
       <Tab.Screen
@@ -70,6 +72,7 @@ export default function TabNavigator() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings" size={size} color={color} />
           ),
+          tabBarAccessibilityLabel: "Setting",
         }}
       />
     </Tab.Navigator>

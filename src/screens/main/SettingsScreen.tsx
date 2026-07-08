@@ -61,6 +61,9 @@ export default function SettingScreen() {
             }}
             thumbColor="#fff"
             style={styles.switch}
+            accessibilityRole="switch"
+            accessibilityLabel="Modalità scura"
+            accessibilityState={{ checked: isDark }}
           />
         </View>
 
@@ -82,6 +85,9 @@ export default function SettingScreen() {
             }}
             thumbColor="#fff"
             style={styles.switch}
+            accessibilityRole="switch"
+            accessibilityLabel="Notifiche"
+            accessibilityState={{ checked: notification }}
           />
         </View>
 
@@ -94,7 +100,7 @@ export default function SettingScreen() {
         />
 
         {/* Navigation rows */}
-        <Pressable style={styles.row}>
+        <Pressable style={styles.row} accessibilityRole="button" accessibilityLabel="Privacy">
           <Ionicons name="lock-closed" size={18} color={currentColors.black} />
           <Text style={[styles.rowLabel, { color: currentColors.black }]}>
             Privacy
@@ -107,7 +113,7 @@ export default function SettingScreen() {
           />
         </Pressable>
 
-        <Pressable style={styles.row}>
+        <Pressable style={styles.row} accessibilityRole="button" accessibilityLabel="Security">
           <Ionicons name="shield" size={18} color={currentColors.black} />
           <Text style={[styles.rowLabel, { color: currentColors.black }]}>
             Security
@@ -120,7 +126,7 @@ export default function SettingScreen() {
           />
         </Pressable>
 
-        <Pressable style={styles.row}>
+        <Pressable style={styles.row} accessibilityRole="button" accessibilityLabel="Account">
           <Ionicons
             name="person-circle"
             size={18}
@@ -138,7 +144,7 @@ export default function SettingScreen() {
         </Pressable>
 
         {/* Logout */}
-        <Pressable style={styles.row} onPress={logout}>
+        <Pressable style={styles.row} onPress={logout} accessibilityRole="button" accessibilityLabel="Esci dall'account">
           <Ionicons
             name="log-out-outline"
             size={18}

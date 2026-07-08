@@ -30,7 +30,12 @@ export default function MealCard({
         },
       ]}
     >
-      <Pressable onPress={onPress} style={styles.direction}>
+      <Pressable
+        onPress={onPress}
+        style={styles.direction}
+        accessibilityRole="button"
+        accessibilityLabel={`Vedi i dettagli di ${strMeal}`}
+      >
         <Image source={{ uri: strMealThumb }} style={styles.image} />
         <Text style={[styles.title, { color: currentColors.secondary }]}>
           {strMeal}

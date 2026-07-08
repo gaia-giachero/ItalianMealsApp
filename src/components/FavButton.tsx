@@ -24,6 +24,11 @@ export default function FavButton({
           borderColor: currentColors.placeholder,
         },
       ]}
+      accessibilityRole="button"
+      accessibilityLabel={
+        isFavorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"
+      }
+      accessibilityState={{ selected: isFavorite }}
     >
       <Ionicons
         name={isFavorite ? "heart" : "heart-outline"}

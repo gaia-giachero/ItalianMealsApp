@@ -54,10 +54,12 @@ export default function DetailsScreen({ route, navigation }: any) {
       <View style={[globalStyles.container, globalStyles.centered]}>
         <Text style={globalStyles.errorText}>Invalid deep link</Text>
         <Pressable
-          style={[globalStyles.btn, styles.backHomeBtn]}
+          style={styles.backBtn}
           onPress={() => navigation.goBack()}
+          accessibilityRole="button"
+          accessibilityLabel="Torna indietro"
         >
-          <Text style={globalStyles.btnText}>Torna alla Home</Text>
+          <Ionicons name="arrow-back" size={24} color={colors.black} />
         </Pressable>
       </View>
     );
@@ -70,7 +72,6 @@ export default function DetailsScreen({ route, navigation }: any) {
       style={globalStyles.container}
       contentContainerStyle={styles.scrollContent}
     >
-
       {loading ? (
         <View style={globalStyles.centered}>
           <ActivityIndicator size="small" color={currentColors.primaryAction} />
@@ -80,13 +81,26 @@ export default function DetailsScreen({ route, navigation }: any) {
         </View>
       ) : error ? (
         <View style={globalStyles.centered}>
-          <Pressable onPress={mealById}>
-            <Ionicons name="refresh" size={24} color={currentColors.primaryAction} />
+          <Pressable
+            onPress={mealById}
+            accessibilityRole="button"
+            accessibilityLabel="Riprova a ricaricare"
+          >
+            <Ionicons
+              name="refresh"
+              size={24}
+              color={currentColors.primaryAction}
+            />
           </Pressable>
-          <Text style={[globalStyles.text, styles.spacedTop]}>
-            Riprova ricaricando la pagina o torna alla HomePage
-          </Text>
-          {/* implementare bottone o altro modo per tornare alla homepage */}
+          <Text style={[globalStyles.text, styles.spacedTop]}>{error}</Text>
+          <Pressable
+            style={[globalStyles.btn, styles.backHomeBtn]}
+            onPress={() => navigation.goBack()}
+            accessibilityRole="button"
+            accessibilityLabel="Torna alla Home"
+          >
+            <Text style={globalStyles.btnText}>Torna alla Home</Text>
+          </Pressable>
         </View>
       ) : (
         <View style={styles.content}>
@@ -94,7 +108,10 @@ export default function DetailsScreen({ route, navigation }: any) {
           <View style={styles.imageContainer}>
             <Image source={{ uri: meal?.strMealThumb }} style={styles.image} />
             <View style={styles.imageOverlay}>
-              <Pressable style={styles.backBtn} onPress={() => navigation.goBack()}>
+              <Pressable
+                style={styles.backBtn}
+                onPress={() => navigation.goBack()}
+              >
                 <Ionicons name="arrow-back" size={24} color={colors.black} />
               </Pressable>
               <FavButton
@@ -110,8 +127,19 @@ export default function DetailsScreen({ route, navigation }: any) {
           </Text>
 
           {/* INGREDIENTS */}
-          <View style={[styles.container, {backgroundColor: currentColors.accent}]}>
-            <Text style={[globalStyles.title, styles.sectionTitle, { color: 'white' }]}>
+          <View
+            style={[
+              styles.container,
+              { backgroundColor: currentColors.accent },
+            ]}
+          >
+            <Text
+              style={[
+                globalStyles.title,
+                styles.sectionTitle,
+                { color: "white" },
+              ]}
+            >
               INGREDIENTS
             </Text>
             {meal?.ingredients.map((i, index) => (
@@ -141,12 +169,12 @@ const styles = StyleSheet.create({
   },
   backButton: {
     padding: 15,
-    backgroundColor: '#c2c2c2',
+    backgroundColor: "#c2c2c2",
     width: 50,
     height: 50,
-    borderRadius: '100%',
+    borderRadius: "100%",
     margin: 5,
-    textAlign: 'center',
+    textAlign: "center",
   },
   backHomeBtn: {
     marginTop: 16,
@@ -165,7 +193,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     marginBottom: 4,
-    color: 'white'
+    color: "white",
   },
   instructions: {
     lineHeight: 22,

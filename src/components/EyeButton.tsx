@@ -12,7 +12,12 @@ interface EyeButtonProps {
 export default function EyeButton({ state, toggle, style }: EyeButtonProps) {
   const { currentColors } = useContext(SettingContext);
   return (
-    <Pressable onPress={toggle} style={style}>
+    <Pressable
+      onPress={toggle}
+      style={style}
+      accessibilityRole="button"
+      accessibilityLabel={state ? "Nascondi password" : "Mostra password"}
+    >
       {state ? (
         <Ionicons name="eye" size={24} color={currentColors.placeholder} />
       ) : (

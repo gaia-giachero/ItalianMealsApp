@@ -27,14 +27,21 @@ export default function SearchBar({ textSearch, onChangeSearch }: search) {
         value={textSearch}
         placeholder="Cerca un piatto..."
         placeholderTextColor={currentColors.placeholder}
+        accessibilityLabel="Cerca un piatto"
       />
       {textSearch.length > 0 && (
         <Pressable
           style={styles.iconRight}
           onPress={() => onChangeSearch("")}
           hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel="Cancella ricerca"
         >
-          <Ionicons name="close-circle" size={18} color={currentColors.placeholder} />
+          <Ionicons
+            name="close-circle"
+            size={18}
+            color={currentColors.placeholder}
+          />
         </Pressable>
       )}
     </View>
