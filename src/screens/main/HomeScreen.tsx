@@ -8,16 +8,15 @@ import {
   Pressable,
   Text,
   StyleSheet,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 
 import MealCard from "../../components/MealCard";
 import SearchBar from "../../components/SearchBar";
 
-import { globalStyles } from "../../theme/style";
-import { colors } from "../../theme/colors";
-import HeaderProfile from "../../components/HeaderProfile";
+import { getGlobalStyles } from "../../theme/style";
 import { SettingContext } from "../../context/SettingContext";
+import HeaderProfile from "../../components/HeaderProfile";
 
 interface Meal {
   idMeal: string;
@@ -27,6 +26,9 @@ interface Meal {
 }
 
 export default function HomeScreen({ navigation }: any) {
+  const { currentColors } = useContext(SettingContext);
+  const globalStyles = getGlobalStyles(currentColors);
+
   // LOADING OF MEALS
   const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
   const [err, setErr] = React.useState<string>();
@@ -65,16 +67,16 @@ export default function HomeScreen({ navigation }: any) {
     setIsRefreshing(false);
   }
 
-  // COLORS STYLE
-  const { currentColors } = useContext(SettingContext)
-
   return (
     <View style={globalStyles.container}>
       <HeaderProfile />
       <View style={styles.body}>
         {loading ? (
           <View style={globalStyles.centered}>
-            <ActivityIndicator size="small" color={currentColors.primaryAction} />
+            <ActivityIndicator
+              size="small"
+              color={currentColors.primaryAction}
+            />
             <Text style={[globalStyles.text, styles.spacedTop]}>
               Caricamento dei piatti in corso...
             </Text>
@@ -82,7 +84,11 @@ export default function HomeScreen({ navigation }: any) {
         ) : err ? (
           <View style={globalStyles.centered}>
             <Pressable onPress={meals}>
-              <Ionicons name="refresh" size={24} color={currentColors.primaryAction} />
+              <Ionicons
+                name="refresh"
+                size={24}
+                color={currentColors.primaryAction}
+              />
             </Pressable>
             <Text style={[globalStyles.text, styles.spacedTop]}>
               Riprova ricaricando la pagina
@@ -130,7 +136,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   listWrapper: {
-    paddingBottom: 87, // altezza barra (67) + respiro (20)
+    paddingBottom: 87, 
   },
   flatList: {
     flex: 1,

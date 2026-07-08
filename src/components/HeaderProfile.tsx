@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { colors } from "../theme/colors";
-import { globalStyles } from "../theme/style";
+import { getGlobalStyles } from "../theme/style";
+import { SettingContext } from "../context/SettingContext";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigation } from '@react-navigation/native';
 
 export default function HeaderProfile() {
     const { name, avatarUri, logout } = useContext(AuthContext);
+    const { currentColors } = useContext(SettingContext);
+    const globalStyles = getGlobalStyles(currentColors);
     const navigation = useNavigation<any>();
 
     return (
@@ -15,13 +17,13 @@ export default function HeaderProfile() {
             <Pressable style={styles.avatarName} onPress={() =>
                 navigation.navigate("Setting")
             }>
-                <View style={styles.avatarContainer}>
+                <View style={[styles.avatarContainer, { backgroundColor: currentColors.placeholder }]}>
                     <Image source={{ uri: avatarUri }} style={styles.avatar} />
                 </View>
-                <Text style={styles.nomeCognome}>{name}</Text>
+                <Text style={[styles.nomeCognome, { color: "#fff" }]}>{name}</Text>
             </Pressable>
             <Pressable onPress={logout}>
-                <Ionicons name="log-out-outline" size={25} color="black" />
+                <Ionicons name="log-out-outline" size={25} color="#fff" />
             </Pressable>
         </View >
     );
@@ -37,14 +39,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "700",
         letterSpacing: 0.9,
-        color: "#000",
     },
     avatarContainer: {
         width: 52,
         height: 52,
         borderRadius: 26,
-        overflow: "hidden",
-        backgroundColor: colors.placeholder,
+        overflow: "hidden"
     },
     avatar: {
         width: 52,

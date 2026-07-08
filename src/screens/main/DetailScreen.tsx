@@ -11,10 +11,10 @@ import {
 import { fetchMealById } from "../../services/meals";
 import { Ionicons } from "@expo/vector-icons";
 import { getGlobalStyles } from "../../theme/style";
-import { colors } from "../../theme/colors";
+import { SettingContext } from "../../context/SettingContext";
 import FavButton from "../../components/FavButton";
 import { FavoritesContext } from "../../context/FavoritesContext";
-import { SettingContext } from "../../context/SettingContext";
+import { colors } from "../../theme/colors";
 
 interface DetailsMeals {
   strMeal: string;
@@ -73,7 +73,7 @@ export default function DetailsScreen({ route, navigation }: any) {
 
       {loading ? (
         <View style={globalStyles.centered}>
-          <ActivityIndicator size="small" color={colors.primaryAction} />
+          <ActivityIndicator size="small" color={currentColors.primaryAction} />
           <Text style={[globalStyles.text, styles.spacedTop]}>
             Caricamento del piatto in corso...
           </Text>
@@ -81,7 +81,7 @@ export default function DetailsScreen({ route, navigation }: any) {
       ) : error ? (
         <View style={globalStyles.centered}>
           <Pressable onPress={mealById}>
-            <Ionicons name="refresh" size={24} color={colors.primaryAction} />
+            <Ionicons name="refresh" size={24} color={currentColors.primaryAction} />
           </Pressable>
           <Text style={[globalStyles.text, styles.spacedTop]}>
             Riprova ricaricando la pagina o torna alla HomePage
@@ -185,8 +185,6 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 300,
-    // borderBottomLeftRadius: 35,
-    // borderBottomRightRadius: 35,
     borderRadius: 35,
   },
   imageOverlay: {

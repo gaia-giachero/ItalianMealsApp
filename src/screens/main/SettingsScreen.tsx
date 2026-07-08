@@ -1,92 +1,152 @@
 import React, { useContext } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Switch,
-  Pressable,
-} from "react-native";
+import { View, Text, Image, StyleSheet, Switch, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { globalStyles } from "../../theme/style";
+import { getGlobalStyles } from "../../theme/style";
+import { SettingContext } from "../../context/SettingContext";
 import { AuthContext } from "../../context/AuthContext";
 import { FavoritesContext } from "../../context/FavoritesContext";
-import { SettingContext } from "../../context/SettingContext";
 
 export default function SettingScreen() {
   const { name, avatarUri, logout } = useContext(AuthContext);
   const { isDark, toggleTheme, currentColors } = useContext(SettingContext);
   const { favorites } = useContext(FavoritesContext);
+  const globalStyles = getGlobalStyles(currentColors);
 
   const [notification, setNotification] = React.useState<boolean>(false);
 
   return (
-    <View style={[styles.container, { backgroundColor: currentColors.primary }]}>
+    <View
+      style={[styles.container, { backgroundColor: currentColors.primary }]}
+    >
       {/* Avatar + Name */}
       <View style={styles.profileSection}>
         <Image source={{ uri: avatarUri }} style={styles.avatar} />
-        <Text style={[globalStyles.title, { color: currentColors.black }]}>{name}</Text>
+        <Text style={[globalStyles.title, { color: currentColors.black }]}>
+          {name}
+        </Text>
 
         {/* Favorites badge */}
-        <View style={[styles.favoritesBadge, { backgroundColor: currentColors.placeholder + "33" }]}>
+        <View
+          style={[
+            styles.favoritesBadge,
+            { backgroundColor: currentColors.placeholder + "33" },
+          ]}
+        >
           <Ionicons name="heart" size={16} color={currentColors.error} />
-          <Text style={[styles.favoritesCount, { color: currentColors.black }]}>{favorites.length}</Text>
+          <Text style={[styles.favoritesCount, { color: currentColors.black }]}>
+            {favorites.length}
+          </Text>
         </View>
       </View>
 
       {/* Settings card */}
-      <View style={[styles.card, { backgroundColor: currentColors.placeholder + "22" }]}>
+      <View
+        style={[
+          styles.card,
+          { backgroundColor: currentColors.placeholder + "22" },
+        ]}
+      >
         {/* Toggle rows */}
         <View style={styles.row}>
           <Ionicons name="moon" size={18} color={currentColors.black} />
-          <Text style={[styles.rowLabel, { color: currentColors.black }]}>Dark Mode</Text>
+          <Text style={[styles.rowLabel, { color: currentColors.black }]}>
+            Dark Mode
+          </Text>
           <Switch
             onValueChange={toggleTheme}
             value={isDark}
-            trackColor={{ false: currentColors.placeholder, true: currentColors.primaryAction }}
+            trackColor={{
+              false: currentColors.placeholder,
+              true: currentColors.primaryAction,
+            }}
             thumbColor="#fff"
             style={styles.switch}
           />
         </View>
 
         <View style={styles.row}>
-          <Ionicons name="notifications" size={18} color={currentColors.black} />
-          <Text style={[styles.rowLabel, { color: currentColors.black }]}>Notifications</Text>
+          <Ionicons
+            name="notifications"
+            size={18}
+            color={currentColors.black}
+          />
+          <Text style={[styles.rowLabel, { color: currentColors.black }]}>
+            Notifications
+          </Text>
           <Switch
             onValueChange={setNotification}
             value={notification}
-            trackColor={{ false: currentColors.placeholder, true: currentColors.primaryAction }}
+            trackColor={{
+              false: currentColors.placeholder,
+              true: currentColors.primaryAction,
+            }}
             thumbColor="#fff"
             style={styles.switch}
           />
         </View>
 
         {/* Divider */}
-        <View style={[styles.divider, { backgroundColor: currentColors.placeholder }]} />
+        <View
+          style={[
+            styles.divider,
+            { backgroundColor: currentColors.placeholder },
+          ]}
+        />
 
         {/* Navigation rows */}
         <Pressable style={styles.row}>
           <Ionicons name="lock-closed" size={18} color={currentColors.black} />
-          <Text style={[styles.rowLabel, { color: currentColors.black }]}>Privacy</Text>
-          <Ionicons name="chevron-forward" size={18} color={currentColors.placeholder} style={styles.chevron} />
+          <Text style={[styles.rowLabel, { color: currentColors.black }]}>
+            Privacy
+          </Text>
+          <Ionicons
+            name="chevron-forward"
+            size={18}
+            color={currentColors.placeholder}
+            style={styles.chevron}
+          />
         </Pressable>
 
         <Pressable style={styles.row}>
           <Ionicons name="shield" size={18} color={currentColors.black} />
-          <Text style={[styles.rowLabel, { color: currentColors.black }]}>Security</Text>
-          <Ionicons name="chevron-forward" size={18} color={currentColors.placeholder} style={styles.chevron} />
+          <Text style={[styles.rowLabel, { color: currentColors.black }]}>
+            Security
+          </Text>
+          <Ionicons
+            name="chevron-forward"
+            size={18}
+            color={currentColors.placeholder}
+            style={styles.chevron}
+          />
         </Pressable>
 
         <Pressable style={styles.row}>
-          <Ionicons name="person-circle" size={18} color={currentColors.black} />
-          <Text style={[styles.rowLabel, { color: currentColors.black }]}>Account</Text>
-          <Ionicons name="chevron-forward" size={18} color={currentColors.placeholder} style={styles.chevron} />
+          <Ionicons
+            name="person-circle"
+            size={18}
+            color={currentColors.black}
+          />
+          <Text style={[styles.rowLabel, { color: currentColors.black }]}>
+            Account
+          </Text>
+          <Ionicons
+            name="chevron-forward"
+            size={18}
+            color={currentColors.placeholder}
+            style={styles.chevron}
+          />
         </Pressable>
 
         {/* Logout */}
         <Pressable style={styles.row} onPress={logout}>
-          <Ionicons name="log-out-outline" size={18} color={currentColors.black} />
-          <Text style={[styles.rowLabel, { color: currentColors.black }]}>Esci dall'account</Text>
+          <Ionicons
+            name="log-out-outline"
+            size={18}
+            color={currentColors.black}
+          />
+          <Text style={[styles.rowLabel, { color: currentColors.black }]}>
+            Esci dall'account
+          </Text>
         </Pressable>
       </View>
     </View>

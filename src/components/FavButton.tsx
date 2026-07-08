@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet } from "react-native";
-import { colors } from "../theme/colors";
+import { SettingContext } from "../context/SettingContext";
 
 interface FavButtonProps {
   isFavorite: boolean;
@@ -12,14 +12,25 @@ export default function FavButton({
   isFavorite,
   onToggleFavorite,
 }: FavButtonProps) {
+  const { currentColors } = useContext(SettingContext);
+
   return (
-      <Pressable onPress={onToggleFavorite} style={styles.prefer}>
-        <Ionicons
-          name={isFavorite ? "heart" : "heart-outline"}
-          size={32}
-          color={isFavorite ? colors.error : colors.black}
-        />
-      </Pressable>
+    <Pressable
+      onPress={onToggleFavorite}
+      style={[
+        styles.prefer,
+        {
+          backgroundColor: currentColors.primary,
+          borderColor: currentColors.placeholder,
+        },
+      ]}
+    >
+      <Ionicons
+        name={isFavorite ? "heart" : "heart-outline"}
+        size={32}
+        color={isFavorite ? currentColors.error : currentColors.black}
+      />
+    </Pressable>
   );
 }
 
@@ -28,8 +39,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderStyle: "solid",
-    borderColor: colors.placeholder,
-    backgroundColor: '#fff',
     borderWidth: 1,
     borderRadius: 5,
     height: 45,

@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext } from "react";
+import React, { createContext, ReactNode } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface FavoriteContextType {

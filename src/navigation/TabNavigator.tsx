@@ -5,7 +5,6 @@ import { Pressable, View, StyleSheet } from "react-native";
 
 import HomeScreen from "../screens/main/HomeScreen";
 import SettingScreen from "../screens/main/SettingsScreen";
-import { colors } from "../theme/colors";
 import FavouriteScreen from "../screens/main/FavouriteScreen";
 import { SettingContext } from "../context/SettingContext";
 
@@ -42,8 +41,8 @@ export default function TabNavigator() {
           zIndex: 999,
         },
         tabBarButton: (props) => <CustomTabButton {...props} />,
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.black,
+        tabBarActiveTintColor: currentColors.primary,
+        tabBarInactiveTintColor: currentColors.black,
       }}
     >
       <Tab.Screen

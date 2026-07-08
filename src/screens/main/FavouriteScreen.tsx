@@ -7,14 +7,13 @@ import {
   Text,
   View,
 } from "react-native";
-import { globalStyles } from "../../theme/style";
+import { getGlobalStyles } from "../../theme/style";
 import { Ionicons } from "@expo/vector-icons";
-import { colors } from "../../theme/colors";
+import { SettingContext } from "../../context/SettingContext";
 import { FavoritesContext } from "../../context/FavoritesContext";
 import { fetchItalianMeals } from "../../services/meals";
 import MealCard from "../../components/MealCard";
 import HeaderProfile from "../../components/HeaderProfile";
-import { SettingContext } from "../../context/SettingContext";
 
 interface Meal {
   idMeal: string;
@@ -25,7 +24,8 @@ interface Meal {
 
 export default function FavouriteScreen({ navigation }: any) {
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
-  const { currentColors } = useContext(SettingContext)
+  const { currentColors } = useContext(SettingContext);
+  const globalStyles = getGlobalStyles(currentColors);
 
   const [mealsItems, setMealsItems] = React.useState<Meal[]>([]);
   const [err, setErr] = React.useState<string>();
@@ -69,7 +69,7 @@ export default function FavouriteScreen({ navigation }: any) {
         {/* LOADING */}
         {loading ? (
           <View style={globalStyles.centered}>
-            <ActivityIndicator size="small" color={colors.primaryAction} />
+            <ActivityIndicator size="small" color={currentColors.primaryAction} />
             <Text style={[globalStyles.text, styles.spacedTop]}>
               Caricamento dei piatti in corso...
             </Text>

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { colors } from "../theme/colors";
 import FavButton from "./FavButton";
 import { FavoritesContext } from "../context/FavoritesContext";
+import { SettingContext } from "../context/SettingContext";
 
 interface MealCardProps {
   idMeal: string;
@@ -11,21 +11,30 @@ interface MealCardProps {
   onPress: () => void;
 }
 
-
 export default function MealCard({
-  idMeal, 
+  idMeal,
   strMeal,
   strMealThumb,
-  onPress
+  onPress,
 }: MealCardProps) {
-
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
+  const { currentColors } = useContext(SettingContext);
 
   return (
-    <View style={styles.card}>
+    <View
+      style={[
+        styles.card,
+        {
+          backgroundColor: currentColors.primary,
+          borderColor: currentColors.placeholder,
+        },
+      ]}
+    >
       <Pressable onPress={onPress} style={styles.direction}>
         <Image source={{ uri: strMealThumb }} style={styles.image} />
-        <Text style={styles.title}>{strMeal}</Text>
+        <Text style={[styles.title, { color: currentColors.secondary }]}>
+          {strMeal}
+        </Text>
       </Pressable>
       <FavButton
         isFavorite={favorites.includes(idMeal)}
@@ -39,9 +48,7 @@ const styles = StyleSheet.create({
   card: {
     alignItems: "center",
     flexDirection: "row",
-    backgroundColor: "#fff",
     borderStyle: "solid",
-    borderColor: "#aaaaaa",
     borderWidth: 1,
     width: "92%",
     paddingLeft: 12,
@@ -51,7 +58,7 @@ const styles = StyleSheet.create({
     gap: 80,
     marginHorizontal: 15,
     marginBottom: 5,
-    borderRadius: 8
+    borderRadius: 8,
   },
   direction: {
     flexDirection: "row",
@@ -66,18 +73,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 15,
-    color: colors.secondary,
     flexShrink: 1,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
-  prefer: {
-    justifyContent: "center",
-    alignItems: "center",
-    borderStyle: "solid",
-    borderColor: colors.placeholder,
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 45,
-    width: 45,
-  },
+  // prefer: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   borderStyle: "solid",
+  //   borderColor: colors.placeholder,
+  //   borderWidth: 1,
+  //   borderRadius: 5,
+  //   height: 45,
+  //   width: 45,
+  // },
 });

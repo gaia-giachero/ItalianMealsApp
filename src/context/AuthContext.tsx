@@ -6,7 +6,7 @@ interface AuthContextType {
   name?: string;
   login: (email: string, password: string) => void;
   logout: () => void;
-  avatarUri?: string
+  avatarUri?: string;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -18,7 +18,7 @@ export const AuthContext = createContext<AuthContextType>({
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [isLogged, setIsLogged] = useState(false);
   const [name, setName] = useState<string | undefined>(undefined);
-  const [avatarUri, setAvatarUri ] = useState<string | undefined>(undefined);
+  const [avatarUri, setAvatarUri] = useState<string | undefined>(undefined);
 
   function login(email: string, password: string) {
     const userFound = validateLogin(email, password);
@@ -36,10 +36,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider
-      value={{ isLogged, name, avatarUri, login, logout }}
-    >
-        {children}
+    <AuthContext.Provider value={{ isLogged, name, avatarUri, login, logout }}>
+      {children}
     </AuthContext.Provider>
   );
 }

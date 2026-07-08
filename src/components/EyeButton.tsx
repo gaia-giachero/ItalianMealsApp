@@ -1,6 +1,7 @@
-import { Ionicons } from '@expo/vector-icons';
-import { Pressable, ViewStyle } from 'react-native';
-import { colors } from '../theme/colors';
+import { Ionicons } from "@expo/vector-icons";
+import { Pressable, ViewStyle } from "react-native";
+import { SettingContext } from "../context/SettingContext";
+import { useContext } from "react";
 
 interface EyeButtonProps {
   state: boolean;
@@ -8,11 +9,15 @@ interface EyeButtonProps {
   style?: ViewStyle;
 }
 
-export default function EyeButton({state, toggle, style} : EyeButtonProps){
-    return(
-        <Pressable onPress={toggle} style={style}>
-            { state ? <Ionicons name="eye" size={24} color={colors.placeholder} /> : <Ionicons name="eye-off" size={24} color={colors.placeholder} /> }
-        </Pressable>
-
-    ) 
+export default function EyeButton({ state, toggle, style }: EyeButtonProps) {
+  const { currentColors } = useContext(SettingContext);
+  return (
+    <Pressable onPress={toggle} style={style}>
+      {state ? (
+        <Ionicons name="eye" size={24} color={currentColors.placeholder} />
+      ) : (
+        <Ionicons name="eye-off" size={24} color={currentColors.placeholder} />
+      )}
+    </Pressable>
+  );
 }

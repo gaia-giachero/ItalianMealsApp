@@ -8,16 +8,19 @@ import {
   KeyboardAvoidingView,
   Platform,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import { validateLogin } from "../../services/auth";
 import EyeButton from "../../components/EyeButton";
 import { AuthContext } from "../../context/AuthContext";
 
-import { globalStyles } from "../../theme/style";
-import { colors } from "../../theme/colors";
+import { getGlobalStyles } from "../../theme/style";
+import { SettingContext } from "../../context/SettingContext";
 
 export default function LoginScreen() {
   const { login } = useContext(AuthContext);
+  const { currentColors } = useContext(SettingContext);
+  const globalStyles = getGlobalStyles(currentColors);
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -40,7 +43,7 @@ export default function LoginScreen() {
       setIsLoading(false);
       setEmail("");
       setPassword("");
-      login(email, password)
+      login(email, password);
     } else {
       setIsLoading(false);
       setError("Email o password non valide! Riprova!");
@@ -48,57 +51,74 @@ export default function LoginScreen() {
   }
 
   return (
-    <View style={[globalStyles.container, globalStyles.centered]}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={globalStyles.panel}
-        keyboardVerticalOffset={50}
+    <KeyboardAvoidingView
+      style={globalStyles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
+    >
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
-        <Text style={[globalStyles.title, styles.spacing]}>Accedi</Text>
-        <TextInput
-          style={[globalStyles.input, styles.form]}
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Email"
-          placeholderTextColor={colors.placeholder}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <View style={[styles.passwordRow, styles.form]}>
+        <View style={globalStyles.panel}>
+          <Text style={[globalStyles.title, styles.spacing]}>Accedi</Text>
           <TextInput
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={!isPasswordVisible}
-            placeholder="Password"
-            placeholderTextColor={colors.placeholder}
-            style={[globalStyles.input, styles.passwordInput]}
+            style={[globalStyles.input, styles.form]}
+            value={email}
+            onChangeText={setEmail}
+            placeholder="Email"
+            placeholderTextColor={currentColors.placeholder}
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
-          <EyeButton
-            state={isPasswordVisible}
-            toggle={() => setIsPasswordVisible(!isPasswordVisible)}
-            style={styles.eyeButton}
-          />
-        </View>
-        {error !== "" && (
-          <Text style={[globalStyles.errorText, styles.form]}>{error}</Text>
-        )}
-        <Pressable
-          style={[globalStyles.btn, styles.form]}
-          onPress={handleLogin}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <ActivityIndicator size="small" color="#fff" />
-          ) : (
-            <Text style={globalStyles.btnText}>Login</Text>
+          <View style={[styles.passwordRow, styles.form]}>
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!isPasswordVisible}
+              placeholder="Password"
+              placeholderTextColor={currentColors.placeholder}
+              style={[globalStyles.input, styles.passwordInput]}
+            />
+            <EyeButton
+              state={isPasswordVisible}
+              toggle={() => setIsPasswordVisible(!isPasswordVisible)}
+              style={styles.eyeButton}
+            />
+          </View>
+          {error !== "" && (
+            <Text style={[globalStyles.errorText, styles.form]}>{error}</Text>
           )}
-        </Pressable>
-      </KeyboardAvoidingView>
-    </View>
+          <Pressable
+            style={[
+              globalStyles.btn,
+              styles.form,
+              isLoading && styles.btnDisabled,
+            ]}
+            onPress={handleLogin}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <Text style={globalStyles.btnText}>Login</Text>
+            )}
+          </Pressable>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 24,
+    paddingVertical: 24,
+  },
   form: {
     width: "100%",
   },
@@ -110,12 +130,15 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   passwordInput: {
-    paddingRight: 50, // spazio per l'EyeButton
+    paddingRight: 50,
   },
   eyeButton: {
     position: "absolute",
     right: 15,
     top: "50%",
-    transform: [{ translateY: -12 }],
+    transform: [{ translateY: -16 }],
+  },
+  btnDisabled: {
+    opacity: 0.6,
   },
 });

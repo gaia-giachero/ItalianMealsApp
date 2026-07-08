@@ -1,108 +1,114 @@
-import { StyleSheet } from 'react-native';
-import { AppColors } from './colors'
+import { StyleSheet } from "react-native";
+import { AppColors } from "./colors";
 
 export const getGlobalStyles = (colors: AppColors) =>
   StyleSheet.create({
-  // View esterna che avvolge ogni schermata
-  container: {
-    flex: 1,
-    backgroundColor: colors.primary,
-  },
-  // Header con avatar (HomeScreen, ecc.)
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: colors.primaryAction,
-    height: 90,
-    paddingHorizontal: 19,
-    paddingVertical: 19,
-    borderRadius: 20,
-    marginTop: 10,
-    marginRight: 10,
-    marginLeft: 10,
-  },
-  // Bottone primario
-  btn: {
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    backgroundColor: colors.primaryAction,
-    alignItems: 'center',
-  },
-  // Testo del bottone primario
-  btnText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  // Bottone secondario, solo bordo
-  btnOutline: {
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: colors.accent,
-    alignItems: 'center',
-  },
-  // Titolo grande
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: colors.secondary,
-  },
-  // Testo normale
-  text: {
-    fontSize: 16,
-    color: colors.black,
-  },
-  // Testo di errore
-  errorText: {
-    color: colors.error,
-    fontSize: 14,
-    marginBottom: 10,
-  },
-  // Campo di input
-  input: {
-    borderWidth: 1.5,
-    borderColor: colors.accent,
-    borderRadius: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    marginBottom: 10,
-    fontSize: 16,
-    color: colors.black,
-    backgroundColor: colors.primary,
-  },
-  search: {
-    borderWidth: 1.5,
-    borderColor: colors.accent,
-    borderRadius: 30,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginBottom: 10,
-    fontSize: 14,
-    color: colors.black,
-    backgroundColor: colors.primary,
-  },
-  // Pannello/card di sfondo (es. dietro un form), più piccolo della pagina
-  panel: {
-    width: '92%',
-    height: '50%',
-    backgroundColor: '#E8E8E8',
-    borderRadius: 24,
-    paddingVertical: 32,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  // View centrata (loading, stati vuoti, ecc.)
-  centered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  center: {
-    alignItems: 'center',
-    marginTop: 30,
-  }
-});
+    // View esterna che avvolge ogni schermata
+    container: {
+      flex: 1,
+      backgroundColor: colors.primary,
+    },
+    // Header con avatar (HomeScreen, ecc.)
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundColor: colors.primaryAction,
+      height: 90,
+      paddingHorizontal: 19,
+      paddingVertical: 19,
+      borderRadius: 20,
+      marginTop: 10,
+      marginRight: 10,
+      marginLeft: 10,
+    },
+    // Bottone primario
+    btn: {
+      paddingVertical: 15,
+      paddingHorizontal: 20,
+      borderRadius: 10,
+      backgroundColor: colors.primaryAction,
+      alignItems: "center",
+    },
+    // Testo del bottone primario
+    btnText: {
+      color: "#FFFFFF",
+      fontSize: 16,
+      fontWeight: "bold",
+    },
+    // Bottone secondario, solo bordo
+    btnOutline: {
+      paddingVertical: 15,
+      paddingHorizontal: 20,
+      borderRadius: 10,
+      borderWidth: 2,
+      borderColor: colors.accent,
+      alignItems: "center",
+    },
+    // Titolo grande
+    title: {
+      fontSize: 22,
+      fontWeight: "bold",
+      color: colors.secondary,
+    },
+    // Testo normale
+    text: {
+      fontSize: 16,
+      color: colors.black,
+    },
+    // Testo di errore
+    errorText: {
+      color: colors.error,
+      fontSize: 14,
+      marginBottom: 10,
+    },
+    // Campo di input
+    input: {
+      borderWidth: 1.5,
+      borderColor: colors.accent,
+      borderRadius: 10,
+      paddingVertical: 15,
+      paddingHorizontal: 20,
+      marginBottom: 10,
+      fontSize: 16,
+      color: colors.black,
+      backgroundColor: colors.primary,
+    },
+    search: {
+      borderWidth: 1.5,
+      borderColor: colors.accent,
+      borderRadius: 30,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      marginBottom: 10,
+      fontSize: 14,
+      color: colors.black,
+      backgroundColor: colors.primary,
+    },
+    // Pannello/card di sfondo (es. dietro un form), più piccolo della pagina
+    panel: {
+      width: "100%",
+      maxWidth: 420,
+      alignSelf: "center",
+      backgroundColor: colors.placeholder + "22", // lascia il tuo valore originale qui
+      borderRadius: 24,
+      paddingVertical: 32,
+      paddingHorizontal: 24,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.15,
+      shadowRadius: 12,
+      elevation: 4,
+    },
+    // View centrata (loading, stati vuoti, ecc.)
+    centered: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    center: {
+      alignItems: "center",
+      marginTop: 30,
+    },
+  });
