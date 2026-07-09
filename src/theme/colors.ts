@@ -12,10 +12,10 @@ const darkColors = {
   primary: '#121212',       // sfondo pagine
   primaryAction: '#007C60', // invariato — colore di brand
   accent: '#007C60',        // invariato — colore di brand
-  secondary: '#00A28A',     // testi titoli, più chiaro per contrasto
-  black: '#FFFFFF',         // testi normali, icone — invertito
-  placeholder: '#A0A0A0',   // leggermente più chiaro per leggibilità su scuro
-  error: '#C62828',         // invariato — colore semantico
+  secondary: '#00A28A',     // testi titoli
+  black: '#FFFFFF',         // testi normali, icone
+  placeholder: '#A0A0A0',   // icone secondarie, bordi, placeholder
+  error: '#C62828',         // errori, cuore preferiti
 };
 
 export type AppColors = typeof lightColors;
