@@ -2,20 +2,25 @@ import React, { createContext, ReactNode } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppColors, colors, themes } from "../theme/colors";
 
+// WIP: la logica delle notifiche non esiste ancora, 
+// le parti commentate sono lì per un'implementazione futura.
+// Per ora il toggle dello switch nella schermata delle impostazioni 
+// è l'unica cosa funzionante per le notifiche nonostante non sia associata alcuna funzione effettiva
+
 interface SettingContextType {
   currentColors: AppColors;
   isDark: boolean;
   toggleTheme: () => void;
-  //   notificationsEnabled: boolean;
-  //   toggleNotifications: () => void;
+  // notificationsEnabled: boolean;
+  // toggleNotifications: () => void;
 }
 
 export const SettingContext = createContext<SettingContextType>({
   currentColors: colors,
   isDark: false,
-  toggleTheme: () => {},
-  //   notificationsEnabled: false,
-  //   toggleNotifications: () => {},
+  toggleTheme: () => { },
+  // notificationsEnabled: false,
+  // toggleNotifications: () => {},
 });
 
 export default function SettingProvider({ children }: { children: ReactNode }) {
@@ -33,7 +38,7 @@ export default function SettingProvider({ children }: { children: ReactNode }) {
       if (theme !== null) {
         setIsDark(JSON.parse(theme));
       }
-    } catch (_) {}
+    } catch (_) { }
     isLoaded.current = true;
   }
   React.useEffect(() => {
@@ -43,7 +48,7 @@ export default function SettingProvider({ children }: { children: ReactNode }) {
     if (!isLoaded.current) return;
     try {
       await AsyncStorage.setItem("app:v1:theme", JSON.stringify(isDark));
-    } catch (_) {}
+    } catch (_) { }
   }
   React.useEffect(() => {
     saveTheme();
