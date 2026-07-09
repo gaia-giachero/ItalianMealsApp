@@ -80,15 +80,5 @@ const styles = StyleSheet.create({
     fontSize: 15,
     flexShrink: 1,
     fontWeight: "bold",
-  },
-  // prefer: {
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   borderStyle: "solid",
-  //   borderColor: colors.placeholder,
-  //   borderWidth: 1,
-  //   borderRadius: 5,
-  //   height: 45,
-  //   width: 45,
-  // },
+  }
 });
