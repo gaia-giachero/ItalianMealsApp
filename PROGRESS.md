@@ -1,7 +1,7 @@
 # PROGRESS.md — Italian Meals App
 
 **Nome studente:** Gaia Giachero  
-**Data ultimo aggiornamento:** 08/07/2026  
+**Data ultimo aggiornamento:** 09/07/2026  
 **Repository GitHub:** [github.com/gaia-giachero/ItalianMealsApp](https://github.com/gaia-giachero/ItalianMealsApp.git)  
 **Google Doc lab 13–22:** [Documento condiviso](https://docs.google.com/document/d/1RXdJJVh4GlMYAngYksM9MLcUvdgkYoO3lizdgMCK36Y/edit?usp=sharing)
 
@@ -9,18 +9,18 @@
 
 ## Schermate obbligatorie
 
-| # | Schermata | Stato | Screenshot | Note |
-|---|-----------|-------|------------|------|
-| 1 | Login | ✅ Completo | — | Funzionale con 3 utenti mock |
-| 2 | Header profilo (avatar + nome) | ✅ Completo | ![pagina home con header(avatar + nome utente), campo di ricerca, lista piatti e tabNavigator](docs\screenshots\homescreen(lista-piatti+header-profilo).jpeg) | Avatar rotondo e nome via `AuthContext`; con navigazione a `SettingScreen` |
-| 3 | Lista piatti italiani | ✅ Completo | ![pagina home con header(avatar + nome utente), campo di ricerca, lista piatti e tabNavigator](docs\screenshots\homescreen(lista-piatti+header-profilo).jpeg) | `FlatList` + `fetchItalianMeals()` + stati loading / error / success |
-| 4 | Ricerca / filtro | ✅ Completo | ![campo di ricerca nella home](docs\screenshots\campo-ricerca.jpeg) | `SearchBar` che filtra la lista in memoria con reset |
-| 5 | Dettaglio piatto | ✅ Completo | ![pagina che si apre quando si clicca su un piatto](docs\screenshots\dettaglio-piatto.jpeg) | Fetch `lookup.php?i={idMeal}` ok; immagine, nome, ingredienti e istruzioni presenti |
-| 6 | Preferiti (AsyncStorage) | ✅ Completo | ![pagina con solo la lista filtrata per i preferiti](docs\screenshots\pagina-preferiti.jpeg) | Toggle + persistenza con chiave `app:v1:favs`; empty state gestito |
-| 7 | Impostazioni + logout | 🔄 In corso | — | `logout` funzionante; badge preferiti con navigazione a `FavouriteScreen`; toggle Dark Mode funzionante, Notifications senza funzione; Privacy, Security, Account sono placeholder |
-| 8 | Errore + Retry | ✅ Completo | ![schermata in caso di errore con la possibilità di ricaricare la pagina cliccando sulla rotellina](docs\screenshots\errore.jpeg) | Gestito in `HomeScreen`, `FavouriteScreen` e `DetailScreen` |
-| 9 | Accessibilità (≥ 2 accorgimenti) | ✅ Completo | — | Nessun `accessibilityLabel` ancora presente |
-| 10 | Deep link (`exp://…/meal/:idMeal`) | ✅ Completo | — | Config `linking` presente; path da aggiornare da `dettagli/:id` a `meal/:idMeal` |
+| # | Schermata | Stato | Screenshot (LightMode) | Screenshot (DarkMode) | Screenshot (Error-LightMode) | Screenshot (Error-DarkMode) | Note |
+|---|-----------|-------|------------|------------|------------|------------|------|
+| 1 | Login | ✅ Completo | ![schermata login](docs\screenshots\LoginScreen-LightMode.png) | ![schermata login](docs\screenshots\LoginScreen-DarkMode.png) | ![dati non validi schermata login](docs\screenshots\Error-LoginScreen-LightMode.png) | ![dati non validi schermata login](docs\screenshots\Error-LoginScreen-DarkMode.png) | Funzionale con 3 utenti mock |
+| 2 | Header profilo (avatar + nome) | ✅ Completo | ![schermata home](docs\screenshots\HomeScreen+HeaderProfile-LightMode.png) | ![schermata home](docs\screenshots\HomeScreen+HeaderProfile-DarkMode.png) | ![errore schermata home](docs\screenshots\Error-HomeScreen-LightMode.png) | ![errore schermata home](docs\screenshots\Error-HomeScreen-DarkMode.png) | Avatar rotondo e nome via `AuthContext`; con navigazione a `SettingScreen` |
+| 3 | Lista piatti italiani | ✅ Completo | ![lista piatti (homescreen)](docs\screenshots\HomeScreen+HeaderProfile-LightMode.png) | ![lista piatti (homescreen)](docs\screenshots\HomeScreen+HeaderProfile-DarkMode.png) | ![errore lista piatti (homescreen)](docs\screenshots\Error-HomeScreen-LightMode.png) | ![errore lista piatti (homescreen)](docs\screenshots\Error-HomeScreen-DarkMode.png) | `FlatList` + `fetchItalianMeals()` + stati loading / error / success |
+| 4 | Ricerca / filtro | ✅ Completo | ![ricerca piatti (homescreen)](docs\screenshots\SearchPlates-LightMode.png) | ![ricerca piatti (homescreen)](docs\screenshots\SearchPlates-DarkMode.png) | — | — | `SearchBar` che filtra la lista in memoria con reset |
+| 5 | Dettaglio piatto | ✅ Completo | ![dettaglio piatto](docs\screenshots\DetailsPlate-LightMode.png) | ![dettaglio piatto](docs\screenshots\DetailsPlate-DarkMode.png) | ![errore dettaglio piatto](docs\screenshots\Error-DetailsPlate-LightMode.png) | ![errore dettaglio piatto](docs\screenshots\Error-DetailsPlate-DarkMode.png) | Fetch `lookup.php?i={idMeal}` ok; immagine, nome, ingredienti e istruzioni presenti |
+| 6 | Preferiti (AsyncStorage) | ✅ Completo | ![pagina preferiti](docs\screenshots\FavoriteScreen-LightMode.png) | ![pagina preferiti](docs\screenshots\FavoriteScreen-DarkMode.png) | ![errore pagina preferiti](docs\screenshots\Error-FavoriteScreen-LightMode.png) | ![errore pagina preferiti](docs\screenshots\Error-FavoriteScreen-DarkMode.png) | Toggle + persistenza con chiave `app:v1:favs`; empty state gestito |
+| 7 | Impostazioni + logout | ✅ Completo | ![pagina impostazioni](docs\screenshots\SettingScreen-LightMode.png) | ![pagina impostazioni](docs\screenshots\SettingScreen-DarkMode.png) | — | — | `logout` funzionante; badge preferiti con navigazione a `FavouriteScreen`; toggle Dark Mode funzionante, Notifications temporaneamente senza funzione; Privacy, Security, Account sono placeholder |
+| 8 | Errore + Retry | ✅ Completo | — | — | — | — | Gestito in `HomeScreen`, `FavouriteScreen` e `DetailScreen` |
+| 9 | Accessibilità (≥ 2 accorgimenti) | ✅ Completo | ![accessibilità](docs\screenshots\Accessibility.png) | — | — | — | Nessun `accessibilityLabel` ancora presente |
+| 10 | Deep link (`exp://…/meal/:idMeal`) | ✅ Completo | ![deep-linking](docs\screenshots\DeepLinking.png) | — | — | — | Config `linking` presente; path da aggiornare da `dettagli/:id` a `meal/:idMeal` |
 
 > Screenshot da aggiungere in `docs/screenshots/` (login, profilo, lista, ricerca, dettaglio, preferiti, impostazioni, errore) e i path da aggiornare nella tabella.
 
@@ -75,7 +75,6 @@
 | `DetailScreen.tsx` | [x] | Stile da migliorare |
 | `SettingsScreen.tsx` | [x] | Avatar, nome, badge preferiti (con navigazione a `FavouriteScreen`), logout funzionante |
 | `SettingsScreen.tsx` | [x] | Funzione da associare al toggle Dark Mode |
-| `SettingsScreen.tsx` | [ ] | Funzione da associare al toggle Notifications |
 | `SettingsScreen.tsx` | [x] | Privacy, Security, Account (attualmente placeholder) |
 
 ### Requisiti obbligatori rimanenti
@@ -84,7 +83,7 @@
 |-----------|-------|------|
 | Accessibilità | [x] | Aggiungere `accessibilityLabel` su almeno 2 elementi interattivi |
 | Deep link | [x] | Testare con `npx uri-scheme open "exp://10.0.2.2:8081/--/meal/52772" --android` dopo fix path |
-| Screenshot | [ ] | Salvare tutte le schermate in `docs/screenshots/` e aggiornare la tabella sopra |
+| Screenshot | [x] | Salvare tutte le schermate in `docs/screenshots/` e aggiornare la tabella sopra |
 
 ---
 
