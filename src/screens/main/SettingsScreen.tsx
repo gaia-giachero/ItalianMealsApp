@@ -165,14 +165,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 30,
   },
-
   screenLabel: {
     fontSize: 13,
     marginTop: 50,
     marginBottom: 20,
   },
-
-  /* Profile section */
   profileSection: {
     alignItems: "center",
     marginBottom: 24,
@@ -197,14 +194,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
   },
-
-  /* Settings card */
   card: {
     borderRadius: 18,
     paddingHorizontal: 16,
     paddingVertical: 6,
   },
-
   row: {
     flexDirection: "row",
     alignItems: "center",
@@ -227,8 +221,6 @@ const styles = StyleSheet.create({
     height: 1,
     marginVertical: 2,
   },
-
-  /* Bottom nav */
   bottomNav: {
     flexDirection: "row",
     backgroundColor: "#DDE3F0",

@@ -2,7 +2,8 @@
 
 **Autore:** Gaia Giachero
 
-App mobile realizzata con React Native + Expo per consultare, cercare e salvare tra i preferiti piatti della cucina italiana, tramite le API pubbliche di [TheMealDB](https://www.themealdb.com/api.php). Include login mock, preferiti persistenti, dark mode e deep linking.
+App mobile realizzata con React Native + Expo per consultare, cercare e salvare tra i preferiti piatti della cucina italiana, tramite le API pubbliche di [TheMealDB](https://www.themealdb.com/api.php).  
+Include login mock, preferiti persistenti, dark mode e deep linking.
 
 ---
 
@@ -74,7 +75,7 @@ Sostituire IP/porta con quelli mostrati dal bundler Expo e `52772` con un id pia
 
 ---
 
-## Google Doc (screenshot lab 13–22)
+## Google Doc (screenshot lab 13–19)
 
 [Link al documento condiviso](https://docs.google.com/document/d/1RXdJJVh4GlMYAngYksM9MLcUvdgkYoO3lizdgMCK36Y/edit?usp=sharing)
 

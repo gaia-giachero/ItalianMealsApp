@@ -63,7 +63,8 @@ export default function HomeScreen({ navigation }: any) {
 
   async function handleRefresh() {
     setIsRefreshing(true);
-    await meals(); // Riesegue la chiamata API reale e aggiorna lo stato dei piatti
+    // Viene rieseguita la chiamata API reale e viene aggiornato lo stato dei piatti
+    await meals(); 
     setIsRefreshing(false);
   }
 

@@ -3,7 +3,7 @@
 **Nome studente:** Gaia Giachero  
 **Data ultimo aggiornamento:** 09/07/2026  
 **Repository GitHub:** [github.com/gaia-giachero/ItalianMealsApp](https://github.com/gaia-giachero/ItalianMealsApp.git)  
-**Google Doc lab 13–22:** [Documento condiviso](https://docs.google.com/document/d/1RXdJJVh4GlMYAngYksM9MLcUvdgkYoO3lizdgMCK36Y/edit?usp=sharing)
+**Google Doc lab 13–19:** [Documento condiviso](https://docs.google.com/document/d/1RXdJJVh4GlMYAngYksM9MLcUvdgkYoO3lizdgMCK36Y/edit?usp=sharing)
 
 ---
 

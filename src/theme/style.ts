@@ -74,6 +74,7 @@ export const getGlobalStyles = (colors: AppColors) =>
       color: colors.black,
       backgroundColor: colors.primary,
     },
+    // Campo di ricerca
     search: {
       borderWidth: 1.5,
       borderColor: colors.accent,
@@ -85,12 +86,12 @@ export const getGlobalStyles = (colors: AppColors) =>
       color: colors.black,
       backgroundColor: colors.primary,
     },
-    // Pannello/card di sfondo (es. dietro un form), più piccolo della pagina
+    // Pannello/card di sfondo più piccolo della pagina
     panel: {
       width: "100%",
       maxWidth: 420,
       alignSelf: "center",
-      backgroundColor: colors.placeholder + "22", // lascia il tuo valore originale qui
+      backgroundColor: colors.placeholder + "22", 
       borderRadius: 24,
       paddingVertical: 32,
       paddingHorizontal: 24,
