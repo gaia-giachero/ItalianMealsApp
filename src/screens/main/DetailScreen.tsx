@@ -165,6 +165,7 @@ export default function DetailsScreen({ route, navigation }: any) {
 
 const styles = StyleSheet.create({
   scrollContent: {
+    flexGrow: 1,
     paddingBottom: 40,
   },
   backButton: {
